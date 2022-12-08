@@ -1,8 +1,15 @@
 import classes from "./Profile.module.sass";
 import {Posts} from "./posts/Posts";
-import state, {ProfilePageType} from "../../../redux/state";
+import {ProfilePageType} from "../../../redux/state";
 
-export const Profile = (props: ProfilePageType) => {
+type PropsType = {
+  props: ProfilePageType
+  addPost: (desc: string) => void
+  onChangeCallback: (newDesc: string) => void
+  descForNewPost: string
+}
+
+export const Profile = (props: PropsType) => {
   return (
     <div>
       <div className={classes.profile}>
@@ -15,15 +22,14 @@ export const Profile = (props: ProfilePageType) => {
           <p className={classes.profile__item}>Nickname: </p>
           <p className={classes.profile__item}>First Name: </p>
           <p className={classes.profile__item}>Last Name: </p>
-          <p className={classes.profile__item}>Contact Phone: </p>
-          <p className={classes.profile__item}>Contact email: </p>
-          <p className={classes.profile__item}>Instagram: </p>
-          <p className={classes.profile__item}>Facebook: </p>
         </div>
       </div>
       <Posts
         title="My Posts"
-        posts={state.profilePage.posts}
+        posts={props.props.posts}
+        addPost={props.addPost}
+        onChangeCallback={props.onChangeCallback}
+        descForNewPost={props.descForNewPost}
       />
     </div>
   )
