@@ -5,16 +5,15 @@ import {Footer} from "./components/footer/Footer"
 import {BrowserRouter, Route} from "react-router-dom"
 import {Profile} from "./components/content/profile/Profile"
 import {News} from "./components/content/news/News"
-import {RootStateType} from "./redux/state";
+import {StoreType} from "./redux/state";
 import {Dialogs} from "./components/content/dialogs/Dialogs";
 
-type AppPropsType ={
-  state: RootStateType
-  addPost: (desc: string) => void
-  onChange: (newDesc: string) => void
+type PropsType ={
+  store: StoreType
 }
 
-function App(props: AppPropsType) {
+const App: React.FC<PropsType> = (props) => {
+  const state = props.store.getState()
 
   return (
     <BrowserRouter>
@@ -31,11 +30,10 @@ function App(props: AppPropsType) {
                 <Route
                   path="/profile"
                   render={() => <Profile
-                    // posts={props.state.profilePage.posts}
-                    props={props.state.profilePage}
-                    addPost={props.addPost}
-                    onChangeCallback={props.onChange}
-                    descForNewPost={props.state.profilePage.descForNewPost}
+                    props={state.profilePage}
+                    descForNewPost={state.profilePage.descForNewPost}
+                    addPost={props.store.addPost.bind(props.store)}
+                    onChangeCallback={props.store.onChange.bind(props.store)}
                   />}
                   // тоже самое в одну строчку
                   // component={()=><Profile posts={props.state.profilePage.posts} title={props.state.profilePage.title}/>}
@@ -44,10 +42,10 @@ function App(props: AppPropsType) {
                   path="/dialogs"
                   render={() => <Dialogs
                     // state={props.state.dialogsPage}
-                    dialogs={props.state.dialogsPage.dialogs}
-                    dialogsTitle={props.state.dialogsPage.dialogsTitle}
-                    messagesTitle={props.state.dialogsPage.messagesTitle}
-                    messages={props.state.dialogsPage.messages}
+                    dialogs={state.dialogsPage.dialogs}
+                    dialogsTitle={state.dialogsPage.dialogsTitle}
+                    messagesTitle={state.dialogsPage.messagesTitle}
+                    messages={state.dialogsPage.messages}
                   />}
                 />
                 <Route
