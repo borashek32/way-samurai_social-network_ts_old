@@ -1,23 +1,22 @@
 import classes from './Posts.module.sass'
 import React, {ChangeEvent} from "react";
 import {Post} from "./post/Post";
-import {PostType} from "../../../../redux/state";
+import {ActionsTypes, addPostActionCreator, changeNewTextActionCreator, PostType} from "../../../../redux/state";
 
 export type PropsType = {
   title: string
   posts: Array<PostType>
-  addPost: (desc: string) => void
-  onChangeCallback: (newDesc: string) => void
   descForNewPost: string
+  dispatch: (action: ActionsTypes) => void
 }
 
 export const Posts = (props: PropsType) => {
   // add post
   const onChangeCallback = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.onChangeCallback(e.currentTarget.value)
+    props.dispatch(changeNewTextActionCreator(e.currentTarget.value))
   }
   const addPost = () => {
-    props.addPost(props.descForNewPost)
+    props.dispatch(addPostActionCreator(props.descForNewPost))
   }
 
   return (

@@ -2,7 +2,7 @@
   "name": "samurai-way",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://borashek32.github.io/way-samurai_social-network_ts/",
+  "homepage": "https://borashek32.github.io/way-samurai_social-network_ts_old/",
   "dependencies": {
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
@@ -11,7 +11,6 @@
     "axios": "0.26.0",
     "classnames": "2.3.1",
     "formik": "2.2.9",
-    "gh-pages": "3.2.3",
     "jest": "27.5.1",
     "node-sass": "^7.0.3",
     "react": "17.0.2",
@@ -64,7 +63,8 @@
     "@types/react-test-renderer": "17.0.1",
     "@types/redux-form": "8.3.3",
     "@types/styled-components": "^5.1.26",
-    "@types/uuid": "^9.0.0"
+    "@types/uuid": "^9.0.0",
+    "gh-pages": "^4.0.0"
   },
   "resolutions": {
     "styled-components": "^5"

@@ -32,8 +32,7 @@ const App: React.FC<PropsType> = (props) => {
                   render={() => <Profile
                     props={state.profilePage}
                     descForNewPost={state.profilePage.descForNewPost}
-                    addPost={props.store.addPost.bind(props.store)}
-                    onChangeCallback={props.store.onChange.bind(props.store)}
+                    dispatch={props.store.dispatch.bind(props.store)}
                   />}
                   // тоже самое в одну строчку
                   // component={()=><Profile posts={props.state.profilePage.posts} title={props.state.profilePage.title}/>}
@@ -41,11 +40,13 @@ const App: React.FC<PropsType> = (props) => {
                 <Route
                   path="/dialogs"
                   render={() => <Dialogs
-                    // state={props.state.dialogsPage}
-                    dialogs={state.dialogsPage.dialogs}
                     dialogsTitle={state.dialogsPage.dialogsTitle}
                     messagesTitle={state.dialogsPage.messagesTitle}
                     messages={state.dialogsPage.messages}
+                    dialogs={state.dialogsPage.dialogs}
+                    title={state.dialogsPage.dialogsTitle}
+                    newMessageBody={state.dialogsPage.newMessageBody}
+                    dispatch={props.store.dispatch.bind(props.store)}
                   />}
                 />
                 <Route

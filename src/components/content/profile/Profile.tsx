@@ -1,12 +1,11 @@
 import classes from "./Profile.module.sass";
 import {Posts} from "./posts/Posts";
-import {ProfilePageType} from "../../../redux/state";
+import {ActionsTypes, ProfilePageType} from "../../../redux/state";
 
 type PropsType = {
   props: ProfilePageType
-  addPost: (desc: string) => void
-  onChangeCallback: (newDesc: string) => void
   descForNewPost: string
+  dispatch: (action: ActionsTypes) => void
 }
 
 export const Profile = (props: PropsType) => {
@@ -27,8 +26,7 @@ export const Profile = (props: PropsType) => {
       <Posts
         title="My Posts"
         posts={props.props.posts}
-        addPost={props.addPost}
-        onChangeCallback={props.onChangeCallback}
+        dispatch={props.dispatch}
         descForNewPost={props.descForNewPost}
       />
     </div>
