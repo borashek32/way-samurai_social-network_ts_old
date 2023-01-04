@@ -5,11 +5,12 @@ import {Footer} from "./components/footer/Footer"
 import {BrowserRouter, Route} from "react-router-dom"
 import {Profile} from "./components/content/profile/Profile"
 import {News} from "./components/content/news/News"
-import {StoreType} from "./redux/state";
+import {StoreType} from "./redux/store";
 import {Dialogs} from "./components/content/dialogs/Dialogs";
+import {ReduxStoreType} from "./redux/redux-store";
 
 type PropsType ={
-  store: StoreType
+  store: ReduxStoreType
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -34,8 +35,6 @@ const App: React.FC<PropsType> = (props) => {
                     descForNewPost={state.profilePage.descForNewPost}
                     dispatch={props.store.dispatch.bind(props.store)}
                   />}
-                  // тоже самое в одну строчку
-                  // component={()=><Profile posts={props.state.profilePage.posts} title={props.state.profilePage.title}/>}
                 />
                 <Route
                   path="/dialogs"

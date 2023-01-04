@@ -1,4 +1,4 @@
-import {PostType, ProfilePageType, sendMessageActionCreator, updateMessageActionCreator} from "./state";
+import {PostType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 
 export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changeNewTextActionCreator>
@@ -12,11 +12,48 @@ export const addPostActionCreator = (desc: string) => {
 export const changeNewTextActionCreator = (newDesc: string) => {
   return {
     type: "CHANGE_NEW_TEXT",
-    newDesc: newDesc
+    descForNewPost: newDesc
   } as const
 }
 
-export const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+const initialState = {
+  title: "My posts",
+  descForNewPost: "",
+  posts: [
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    }
+  ],
+}
+
+export const profileReducer = (state: ProfilePageType = initialState, action: any) => {
   if (action.type === "ADD_POST") {
     const newPost: PostType = {
       id: v1(),
@@ -25,9 +62,10 @@ export const profileReducer = (state: ProfilePageType, action: ActionsTypes) => 
     }
     state.posts.push(newPost)
     state.descForNewPost = ""
-
+    return {...state}
   } else if (action.type === "CHANGE_NEW_TEXT") {
-    state.descForNewPost = action.newDesc
+    console.log(action.type)
+    return {...state, descForNewPost: action.descForNewPost}
   }
   return state
 }

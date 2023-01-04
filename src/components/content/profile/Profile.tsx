@@ -1,6 +1,7 @@
 import classes from "./Profile.module.sass";
 import {Posts} from "./posts/Posts";
-import {ActionsTypes, ProfilePageType} from "../../../redux/state";
+import {ActionsTypes, ProfilePageType} from "../../../redux/store";
+import {PostsContainer} from "./posts/PostsContainer";
 
 type PropsType = {
   props: ProfilePageType
@@ -23,7 +24,7 @@ export const Profile = (props: PropsType) => {
           <p className={classes.profile__item}>Last Name: </p>
         </div>
       </div>
-      <Posts
+      <PostsContainer
         title="My Posts"
         posts={props.props.posts}
         dispatch={props.dispatch}

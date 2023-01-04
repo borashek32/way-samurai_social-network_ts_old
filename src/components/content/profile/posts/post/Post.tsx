@@ -1,7 +1,7 @@
 import classes from './Post.module.sass'
 import Author from "./Author/Author";
 import React from "react";
-import {PostType} from "../../../../../redux/state";
+import {PostType} from "../../../../../redux/store";
 
 type PropsType = {
   post: PostType

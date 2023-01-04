@@ -1,4 +1,4 @@
-import {DialogPageType, MessageType} from "./state";
+import {DialogPageType, MessageType} from "./store";
 import {v1} from "uuid";
 
 export type ActionsTypes = ReturnType<typeof sendMessageActionCreator> | ReturnType<typeof updateMessageActionCreator>
@@ -16,7 +16,27 @@ export const updateMessageActionCreator = (newText: string) => {
   } as const
 }
 
-export const dialogsReducer = (state: DialogPageType, action: ActionsTypes) => {
+const initialState = {
+  dialogsTitle: "Dialogs",
+  dialogs: [
+    {id: v1(), userName: "Polina", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+    {id: v1(), userName: "Vadim", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+    {id: v1(), userName: "Igor", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+    {id: v1(), userName: "Olga", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+    {id: v1(), userName: "Petr", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."}
+  ],
+  messagesTitle: "Messages from ",
+  messages: [
+    {id: v1(), text: "Lorem ipsum dolor"},
+    {id: v1(), text: "Lorem ipsum dolor"},
+    {id: v1(), text: "Lorem ipsum dolor"},
+    {id: v1(), text: "Lorem ipsum dolor"},
+    {id: v1(), text: "Lorem ipsum dolor"}
+  ],
+  newMessageBody: ""
+}
+
+export const dialogsReducer = (state: DialogPageType = initialState, action: any) => {
   if (action.type === "SEND_MESSAGE") {
     const newMessage: MessageType = {
       id: v1(),

@@ -2,14 +2,11 @@ import classes from './Dialogs.module.sass'
 import {NavLink} from "react-router-dom"
 import {
   ActionsTypes,
-  addPostActionCreator,
-  DialogPageType,
   DialogType, MessageType,
-  PostType, sendMessageActionCreator,
-  updateMessageActionCreator
-} from "../../../redux/state";
+} from "../../../redux/store";
 import {ButtonDefault} from "../../utils/buttons/ButtonDefault";
-import React, {ChangeEvent, useRef} from "react";
+import React, {ChangeEvent} from "react";
+import {sendMessageActionCreator, updateMessageActionCreator} from "../../../redux/dialogs-reducer";
 
 export type PropsType = {
   title: string
