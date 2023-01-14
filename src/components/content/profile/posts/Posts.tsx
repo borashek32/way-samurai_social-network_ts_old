@@ -1,35 +1,19 @@
 import classes from './Posts.module.sass'
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {Post} from "./post/Post";
-import {ActionsTypes, PostType} from "../../../../redux/store";
-import {addPostActionCreator, changeNewTextActionCreator} from "../../../../redux/profile-reducer";
+import {PostsPagePropsType} from "./PostsContainer";
 
-export type PropsType = {
-  title: string
-  posts: Array<PostType>
-  descForNewPost: string
-  onChangeCallback: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  addPost: () => void
-}
 
-export const Posts = (props: PropsType) => {
-  // add post
-  // const onChangeCallback = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   props.dispatch(changeNewTextActionCreator(e.currentTarget.value))
-  // }
-  // const addPost = () => {
-  //   props.addPost()
-  //   // props.dispatch(addPostActionCreator(props.descForNewPost))
-  // }
+export const Posts = (props: PostsPagePropsType) => {
 
   return (
     <div className={classes.posts}>
-      <h2 className={classes.posts__header}>{props.title}</h2>
+      <h2 className={classes.posts__header}>{props.profilePage.title}</h2>
       <div className={classes.addPost}>
         <div className={classes.post__content}>
           <textarea
-            onChange={props.onChangeCallback}
-            value={props.descForNewPost}
+            onChange={props.onChange}
+            value={props.profilePage.descForNewPost}
             rows={5}
             className={classes.addPost__textarea}
             placeholder={"Type here to publish a new post"}
@@ -39,11 +23,13 @@ export const Posts = (props: PropsType) => {
           </div>
         </div>
       </div>
-      {props.posts.map((p) => {
+      {props.profilePage.posts.map((p) => {
         return (
           <Post
+            likes={p.likes}
+            id={p.id}
+            desc={p.desc}
             key={p.id}
-            post={p}
           />
         )
       })}

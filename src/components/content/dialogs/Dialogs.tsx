@@ -1,38 +1,18 @@
 import classes from './Dialogs.module.sass'
 import {NavLink} from "react-router-dom"
-import {
-  ActionsTypes,
-  DialogType, MessageType,
-} from "../../../redux/store";
 import {ButtonDefault} from "../../utils/buttons/ButtonDefault";
-import React, {ChangeEvent} from "react";
-import {sendMessageActionCreator, updateMessageActionCreator} from "../../../redux/dialogs-reducer";
+import React from "react";
+import {DialogsPagePropsType} from "./DialogsContainer";
 
-export type PropsType = {
-  title: string
-  dialogsTitle: string
-  messagesTitle: string
-  messages: Array<MessageType>
-  dialogs: Array<DialogType>
-  newMessageBody: string
-  dispatch: (action: ActionsTypes) => void
-}
+export type PropsType = DialogsPagePropsType
 
 export const Dialogs = (props: PropsType) => {
-  let newMessageBody = props.newMessageBody
-
-  const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(updateMessageActionCreator(e.currentTarget.value))
-  }
-  const onSendMessageClick = () => {
-    props.dispatch(sendMessageActionCreator(props.newMessageBody))
-  }
 
   return (
     <div className={classes.messages}>
       <div className={classes.messages__column_user}>
-        <h3 className={classes.messages__header}>{props.dialogsTitle}</h3>
-        {props.dialogs.map((dialog) => {
+        <h3 className={classes.messages__header}>{props.dialogsPage.dialogsTitle}</h3>
+        {props.dialogsPage.dialogs.map((dialog) => {
           let path = "/dialogs/" + dialog.id;
           return (
             <div className={classes.messages__user_wrapper} key={dialog.id}>
@@ -47,8 +27,8 @@ export const Dialogs = (props: PropsType) => {
         })}
       </div>
       <div className={classes.messages__column_messages}>
-        <h3 className={classes.messages__header}>{props.messagesTitle}</h3>
-        {props.messages.map((m) => {
+        <h3 className={classes.messages__header}>{props.dialogsPage.messagesTitle}</h3>
+        {props.dialogsPage.messages.map((m) => {
           return (
             <div key={m.id} className={classes.messageWrapper}>
               <p>{m.text}</p>
@@ -58,14 +38,14 @@ export const Dialogs = (props: PropsType) => {
         <div className={classes.addMessageWrapper}>
           <textarea
             rows={3}
-            value={newMessageBody}
-            onChange={onNewMessageChange}
+            value={props.dialogsPage.newMessageBody}
+            onChange={props.onNewMessageChange}
             placeholder={"Enter your message"}
             className={classes.addPost__textarea}
           ></textarea>
           <ButtonDefault
             name={'Add message'}
-            callback={onSendMessageClick}
+            callback={props.onSendMessageClick}
           />
         </div>
       </div>

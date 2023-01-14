@@ -1,12 +1,27 @@
-import {DialogPageType, MessageType} from "./store";
 import {v1} from "uuid";
 
 export type ActionsTypes = ReturnType<typeof sendMessageActionCreator> | ReturnType<typeof updateMessageActionCreator>
 
-export const sendMessageActionCreator = (text: string) => {
+export type DialogPageType = {
+  dialogsTitle: string
+  dialogs: Array<DialogType>
+  messagesTitle: string
+  messages: Array<MessageType>
+  newMessageBody: string
+}
+export type MessageType = {
+  id: string
+  text: string
+}
+export type DialogType = {
+  id: string
+  userName: string
+  text: string
+}
+
+export const sendMessageActionCreator = () => {
   return {
     type: "SEND_MESSAGE",
-    text: text
   } as const
 }
 export const updateMessageActionCreator = (newText: string) => {
@@ -16,7 +31,7 @@ export const updateMessageActionCreator = (newText: string) => {
   } as const
 }
 
-const initialState = {
+const initialState: DialogPageType = {
   dialogsTitle: "Dialogs",
   dialogs: [
     {id: v1(), userName: "Polina", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
@@ -24,29 +39,37 @@ const initialState = {
     {id: v1(), userName: "Igor", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
     {id: v1(), userName: "Olga", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
     {id: v1(), userName: "Petr", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."}
-  ],
+  ] as DialogType[],
   messagesTitle: "Messages from ",
   messages: [
     {id: v1(), text: "Lorem ipsum dolor"},
     {id: v1(), text: "Lorem ipsum dolor"},
-    {id: v1(), text: "Lorem ipsum dolor"},
-    {id: v1(), text: "Lorem ipsum dolor"},
     {id: v1(), text: "Lorem ipsum dolor"}
-  ],
+  ] as MessageType[],
   newMessageBody: ""
 }
 
-export const dialogsReducer = (state: DialogPageType = initialState, action: any) => {
-  if (action.type === "SEND_MESSAGE") {
-    const newMessage: MessageType = {
-      id: v1(),
-      text: action.text
+export const dialogsReducer = (state = initialState, action: any) => {
+  switch (action.type) {
+    case "SEND_MESSAGE": {
+      const newMessage: MessageType = {
+        id: v1(),
+        text: state.newMessageBody
+      }
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+        newMessageBody: ""
+      }
     }
-    state.messages.push(newMessage)
-    state.newMessageBody = ''
-
-  } else if (action.type === "UPDATE_NEW_MESSAGE_BODY") {
-    state.newMessageBody = action.text
+    case "UPDATE_NEW_MESSAGE_BODY": {
+      return {
+        ...state,
+        newMessageBody: action.text
+      }
+    }
+    default: {
+      return state
+    }
   }
-  return state
 }
