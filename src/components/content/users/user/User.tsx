@@ -3,15 +3,18 @@ import s from "./User.module.sass"
 import React from "react";
 import {UserType} from "../../../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type PropsType = {
   user: UserType
   follow: (userId: string) => void
   unfollow: (userId: string) => void
+  followingInProgress: boolean
+  toggleFollowingInProgress: (followingInProgress: boolean) => void
 }
 
 export const User = (props: PropsType) => {
-  // debugger
+
   return (
     <div className={s.userWrapper}>
       <div className={s.userContainer}>
@@ -34,8 +37,52 @@ export const User = (props: PropsType) => {
       </div>
       <div className={s.user__buttons}>
         {!props.user.followed
-          ? <button className={s.button} onClick={() => props.follow(props.user.id)}>Follow</button>
-          : <button className={s.button} onClick={() => props.unfollow(props.user.id)}>Unfollow</button>
+          ? <button
+              className={s.button}
+              disabled={props.followingInProgress}
+              onClick={() => {
+
+                console.log(props)
+                console.log(props.toggleFollowingInProgress)
+                console.log(props.user.followingInProgress)
+                props.toggleFollowingInProgress(true)
+
+            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.user.id}`, {},{
+              withCredentials: true,
+              headers: {
+                "API-KEY": "46b63e5a-3617-4795-b158-8f82fffd20f6"
+              }
+            })
+              .then(response => {
+                if (response.data.resultCode === 0) {
+                  props.follow(props.user.id)
+                }
+                props.toggleFollowingInProgress(false)
+              })
+          }
+          }>Follow</button>
+
+          : <button
+              className={s.button}
+              disabled={props.followingInProgress}
+              onClick={() => {
+
+            props.toggleFollowingInProgress(true)
+
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.user.id}`, {
+              withCredentials: true,
+              headers: {
+                "API-KEY": "46b63e5a-3617-4795-b158-8f82fffd20f6"
+              }
+            })
+              .then(response => {
+                if (response.data.resultCode === 0) {
+                  props.unfollow(props.user.id)
+                }
+                props.toggleFollowingInProgress(false)
+              })
+            }
+          }>Unfollow</button>
         }
       </div>
     </div>

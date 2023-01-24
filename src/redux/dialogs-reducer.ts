@@ -19,18 +19,6 @@ export type DialogType = {
   text: string
 }
 
-export const sendMessageActionCreator = () => {
-  return {
-    type: "SEND_MESSAGE",
-  } as const
-}
-export const updateMessageActionCreator = (newText: string) => {
-  return {
-    type: "UPDATE_NEW_MESSAGE_BODY",
-    text: newText
-  } as const
-}
-
 const initialState: DialogPageType = {
   dialogsTitle: "Dialogs",
   dialogs: [
@@ -72,4 +60,11 @@ export const dialogsReducer = (state = initialState, action: any) => {
       return state
     }
   }
+}
+
+export const sendMessageActionCreator = () => {
+  return {type: "SEND_MESSAGE"} as const
+}
+export const updateMessageActionCreator = (newText: string) => {
+  return {type: "UPDATE_NEW_MESSAGE_BODY", text: newText} as const
 }

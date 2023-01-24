@@ -11,12 +11,12 @@ type PropsType = {
 
 export const Users = (props: PropsType) => {
 
+  console.log(props)
   let pageCount: number = Math.ceil(props.usersPageType.totalUsersCount / props.usersPageType.pageSize)
   let pages = []
   for (let i = 1; i <= props.usersPageType.maxPageCount; i++) {
     pages.push(i)
   }
-  console.log(props.usersPageType.usersPage.users)
 
   return (
     <div>
@@ -42,6 +42,8 @@ export const Users = (props: PropsType) => {
           props.usersPageType.usersPage.users.map((u: UserType) => {
             return (
               <User
+                toggleFollowingInProgress={props.usersPageType.toggleFollowingProgress}
+                followingInProgress={props.usersPageType.followingInProgress}
                 unfollow={props.usersPageType.unfollow}
                 follow={props.usersPageType.follow}
                 key={u.id}

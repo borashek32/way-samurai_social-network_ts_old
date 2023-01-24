@@ -1,13 +1,12 @@
 import './App.sass';
-import Header from "./components/header/Header"
+import HeaderContainer from "./components/header/HeaderContainer"
 import {Navbar} from "./components/navbar/Navbar"
 import {Footer} from "./components/footer/Footer"
 import {Route} from "react-router-dom"
-import {Profile} from "./components/content/profile/Profile"
 import {News} from "./components/content/news/News"
 import DialogsContainer from "./components/content/dialogs/DialogsContainer";
 import UsersContainer from "./components/content/users/UsersContainer";
-import WithUrlDataContainerComponent, {ProfileContainer} from "./components/content/profile/ProfileContainer";
+import WithUrlDataContainerComponent from "./components/content/profile/ProfileContainer";
 
 
 const App = () => {
@@ -15,7 +14,7 @@ const App = () => {
   return (
     <div className="container">
       <div className="wrapper">
-        <Header/>
+        <HeaderContainer />
         <main className="main">
           <Navbar/>
           <div className='content'>
@@ -26,7 +25,7 @@ const App = () => {
             </div>
             <div className='content__desc'>
 
-              <Route path={"/"} exact component={Profile}/>
+              <Route path={"/"} exact component={WithUrlDataContainerComponent}/>
 
               <Route path="/news" component={News}/>
               <Route path="/profile/:userId" component={WithUrlDataContainerComponent}/>

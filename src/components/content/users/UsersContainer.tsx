@@ -1,18 +1,22 @@
 import React from "react";
+import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {
   follow,
   setCurrentPage,
   setTotalUsersCount,
-  setUsers, toggleIsFetching,
+  setUsers,
+  toggleFollowingProgress,
+  toggleIsFetching,
   unfollow,
   UsersPageType,
   UserType
-} from "../../../redux/users-reducer";
-import axios from "axios";
+}
+  from "../../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../../utils/preloader/Preloader";
+import {getUsers} from "../../../api/api";
 
 type MapStatePropsType = {
   usersPage: UsersPageType
@@ -21,6 +25,7 @@ type MapStatePropsType = {
   currentPage: number
   maxPageCount: number
   isFetching: boolean
+  followingInProgress: boolean
 }
 type MapDispatchToProps = {
   follow: (userId: string) => void
@@ -29,6 +34,7 @@ type MapDispatchToProps = {
   setCurrentPage: (pageNumber: number) => void
   setTotalUsersCount: (totalUsersCount: number) => void
   toggleIsFetching: (isFetching: boolean) => void
+  toggleFollowingProgress: (isFetching: boolean) => void
 }
 
 export type UsersPagePropsType = MapStatePropsType & MapDispatchToProps
@@ -37,21 +43,23 @@ class UsersComponent extends React.Component<UsersPagePropsType> {
 
   componentDidMount() {
     this.props.toggleIsFetching(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-      .then(response => {
+
+    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
-        this.props.setTotalUsersCount(response.data.totalCount)
+        this.props.setUsers(data.items)
+        this.props.setTotalUsersCount(data.totalCount)
       })
   }
 
   onPageChanged = (pageNumber: number) => {
     this.props.setCurrentPage(pageNumber)
     this.props.toggleIsFetching(true)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-      .then(response => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+      withCredentials: true
+    })
+      .then(data => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
+        this.props.setUsers(data.data.items)
       })
   }
 
@@ -76,7 +84,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     maxPageCount: state.usersPage.maxPageCount,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress
   }
 }
 
@@ -116,5 +125,5 @@ export default connect(mapStateToProps, {
   // если названия одинаковые и справа и слева, то можно писать только то, что справа
   // да и во всех action creators поудалять в конце ActionCreator
   // и в другом файле тоже удалить последние слова в названиях
-  follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching
+  follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress
 }) (UsersComponent)

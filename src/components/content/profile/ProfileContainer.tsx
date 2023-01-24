@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {getUserInfo, getUsers} from "../../../api/api";
 
 type PathParamsType = {
   userId: string
@@ -24,10 +25,12 @@ export type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 export class ProfileContainer extends React.Component<ProfilePagePropsType> {
 
   componentDidMount() {
-    const userId = this.props.match.params.userId
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-      .then(response => {
-        this.props.setUserProfile(response.data)
+    let userId = this.props.match.params.userId
+    if (!userId) {
+      userId = "2"
+    }
+    getUserInfo(userId).then(data => {
+        this.props.setUserProfile(data)
       })
   }
 
