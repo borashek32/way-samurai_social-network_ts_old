@@ -16,8 +16,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         <img width="150px" className={classes.author__logo}
              src={
                     !props.profile.photos.small
-                      ? "https://gamerwall.pro/uploads/posts/2022-06/1655668285_2-gamerwall-pro-p-koti-na-more-priroda-krasivo-foto-3.jpg"
-                      : props.profile.photos.small
+                        ? "https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1nfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+                        : props.profile.photos.small
                     }
              alt="cat"/>
       </div>

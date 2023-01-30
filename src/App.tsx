@@ -3,7 +3,6 @@ import HeaderContainer from "./components/header/HeaderContainer"
 import {Navbar} from "./components/navbar/Navbar"
 import {Footer} from "./components/footer/Footer"
 import {Route} from "react-router-dom"
-import {News} from "./components/content/news/News"
 import DialogsContainer from "./components/content/dialogs/DialogsContainer";
 import UsersContainer from "./components/content/users/UsersContainer";
 import WithUrlDataContainerComponent from "./components/content/profile/ProfileContainer";
@@ -27,7 +26,6 @@ const App = () => {
 
               <Route path={"/"} exact component={WithUrlDataContainerComponent}/>
 
-              <Route path="/news" component={News}/>
               <Route path="/profile/:userId" component={WithUrlDataContainerComponent}/>
               <Route path="/dialogs" component={DialogsContainer}/>
               <Route path="/users" component={UsersContainer}/>

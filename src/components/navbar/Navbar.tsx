@@ -6,9 +6,6 @@ export const Navbar = () => {
     <nav className={classes.nav}>
       <ul className={classes.nav__list}>
         <li className={classes.nav__item}>
-          <NavLink to="/news" activeClassName={classes.active}>News</NavLink>
-        </li>
-        <li className={classes.nav__item}>
           <NavLink to="/profile" activeClassName={classes.active}>Profile</NavLink>
         </li>
         <li className={classes.nav__item}>

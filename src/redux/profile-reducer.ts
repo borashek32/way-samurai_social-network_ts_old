@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {usersApi} from "../api/api";
 
 const ADD_POST = "ADD_POST"
 const CHANGE_NEW_TEXT = "CHANGE_NEW_TEXT"
@@ -50,8 +52,15 @@ export const addPost = () => {
 export const changeNewText = (newDesc: string) => {
   return { type: CHANGE_NEW_TEXT, descForNewPost: newDesc } as const
 }
-export const setUserProfile = (profile: ApiUserProfileType) => {
+const setUserProfile = (profile: ApiUserProfileType) => {
   return { type: SET_USER_PROFILE, profile } as const
+}
+// thunk
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+  usersApi.getProfile(userId)
+    .then(response => {
+      dispatch(setUserProfile(response.data))
+    })
 }
 
 const initialState: ProfilePageType = {

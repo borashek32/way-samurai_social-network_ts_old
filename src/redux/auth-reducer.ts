@@ -1,3 +1,7 @@
+import axios from "axios";
+import {authAPI, usersApi} from "../api/api";
+import {Dispatch} from "redux";
+
 const SET_USER_DATA = "SET-USER-DATA"
 
 export type ActionsTypes = ReturnType<typeof setAuthUserData>
@@ -35,4 +39,16 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
 
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null) => {
   return {type: SET_USER_DATA, data: {userId, email, login}} as const
+}
+
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+  return () => {
+    authAPI.me()
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          const {id, email, login} = response.data.data
+          dispatch(setAuthUserData(id, email, login))
+        }
+      })
+  }
 }

@@ -16,9 +16,6 @@ function Header(props: HeaderType) {
       </NavLink>
       <ul className={classes.header__menu}>
         <li className={classes.nav__item}>
-          <NavLink to="/news" activeClassName={classes.active}>News</NavLink>
-        </li>
-        <li className={classes.nav__item}>
           <NavLink to="/profile" activeClassName={classes.active}>Profile</NavLink>
         </li>
         <li className={classes.nav__item}>
