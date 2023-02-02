@@ -59,6 +59,7 @@ const setUserProfile = (profile: ApiUserProfileType) => {
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
   usersApi.getProfile(userId)
     .then(response => {
+      console.log(response.data)
       dispatch(setUserProfile(response.data))
     })
 }

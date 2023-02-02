@@ -17,6 +17,7 @@ type MapStatePropsType = {
   maxPageCount: number
   isFetching: boolean
   followingInProgress: Array<string>
+  isAuth: boolean
 }
 type MapDispatchToProps = {
   follow: (userId: string) => void
@@ -60,7 +61,8 @@ const mapStateToProps = (state: AppStateType): { maxPageCount: 10;
                                                  totalUsersCount: number;
                                                  pageSize: number;
                                                  isFetching: boolean;
-                                                 currentPage: number
+                                                 currentPage: number;
+                                                 isAuth: boolean
 } => {
   return {
     usersPage: state.usersPage,
@@ -69,7 +71,8 @@ const mapStateToProps = (state: AppStateType): { maxPageCount: 10;
     currentPage: state.usersPage.currentPage,
     maxPageCount: state.usersPage.maxPageCount,
     isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress
+    followingInProgress: state.usersPage.followingInProgress,
+    isAuth: state.auth.isAuth
   }
 }
 

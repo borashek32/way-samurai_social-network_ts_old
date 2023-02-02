@@ -1,5 +1,4 @@
-import axios from "axios";
-import {authAPI, usersApi} from "../api/api";
+import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 const SET_USER_DATA = "SET-USER-DATA"
@@ -52,3 +51,12 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
       })
   }
 }
+
+export const authMeTC = () => {
+  return (dispatch: Dispatch) => {
+    const options = { withCredentials: true };
+    return authAPI.authMe(options).then(({ data }) => {
+      if (data.resultCode === 0) dispatch(AuthAC.setAuthData(data.data, true));
+    });
+  };
+};

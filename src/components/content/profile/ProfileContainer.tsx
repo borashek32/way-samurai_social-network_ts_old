@@ -26,6 +26,7 @@ export class ProfileContainer extends React.Component<ProfilePagePropsType> {
     if (!userId) {
       userId = "2"
     }
+    console.log(userId)
     this.props.getUserProfile(userId)
   }
 
