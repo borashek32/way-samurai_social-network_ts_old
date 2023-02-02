@@ -27,7 +27,7 @@ function Header(props: HeaderType) {
         <li className={classes.nav__item}>
           {
             props.isAuth
-              ? props.login
+              ? <p>Nataly</p>
               : <NavLink to="/login" activeClassName={classes.active}>Login</NavLink>
           }
         </li>
