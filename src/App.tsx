@@ -5,8 +5,11 @@ import {Footer} from "./components/footer/Footer"
 import {Route} from "react-router-dom"
 import DialogsContainer from "./components/content/dialogs/DialogsContainer";
 import UsersContainer from "./components/content/users/UsersContainer";
-import WithUrlDataContainerComponent from "./components/content/profile/ProfileContainer";
+import ProfileContainer from "./components/content/profile/ProfileContainer";
 import {Login} from "./components/login/Login";
+import {Dialogs} from "./components/content/dialogs/Dialogs";
+import {Users} from "./components/content/users/Users";
+import UsersComponent from "./components/content/users/UsersContainer";
 
 
 const App = () => {
@@ -25,9 +28,9 @@ const App = () => {
             </div>
             <div className='content__desc'>
 
-              <Route path={"/"} exact component={WithUrlDataContainerComponent}/>
+              <Route path={"/"} exact component={ProfileContainer}/>
 
-              <Route path="/profile/:userId?" component={WithUrlDataContainerComponent}/>
+              <Route path="/profile/:userId?" component={ProfileContainer}/>
               <Route path="/dialogs" component={DialogsContainer}/>
               <Route path="/users" component={UsersContainer}/>
 

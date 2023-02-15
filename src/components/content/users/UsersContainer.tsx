@@ -1,13 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {
-  follow, getUsers, setCurrentPage,
-  toggleFollowingProgress, unfollow, UsersPageType, UserType
-}
-  from "../../../redux/users-reducer";
+import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, UsersPageType, UserType} from "../../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../../utils/preloader/Preloader";
+import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
   usersPage: UsersPageType
@@ -17,7 +15,6 @@ type MapStatePropsType = {
   maxPageCount: number
   isFetching: boolean
   followingInProgress: Array<string>
-  isAuth: boolean
 }
 type MapDispatchToProps = {
   follow: (userId: string) => void
@@ -62,7 +59,6 @@ const mapStateToProps = (state: AppStateType): { maxPageCount: 10;
                                                  pageSize: number;
                                                  isFetching: boolean;
                                                  currentPage: number;
-                                                 isAuth: boolean
 } => {
   return {
     usersPage: state.usersPage,
@@ -71,8 +67,7 @@ const mapStateToProps = (state: AppStateType): { maxPageCount: 10;
     currentPage: state.usersPage.currentPage,
     maxPageCount: state.usersPage.maxPageCount,
     isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
-    isAuth: state.auth.isAuth
+    followingInProgress: state.usersPage.followingInProgress
   }
 }
 
@@ -101,16 +96,24 @@ const mapStateToProps = (state: AppStateType): { maxPageCount: 10;
 
 // вместо того, что сверху закомменчено
 // однотипные функции можно записать короче, как ниже
-export default connect(mapStateToProps, {
-  // follow: followActionCreator,
-  // unfollow: unfollowActionCreator,
-  // setUsers: setUsersActionCreator,
-  // setCurrentPage: setCurrentPageActionCreator,
-  // setTotalUsersCount: setTotalUsersCountActionCreator,
-  // toggleIsFetching: toggleIsFetchingActionCreator
+// export default withAuthRedirect(connect(mapStateToProps, {
+//   // follow: followActionCreator,
+//   // unfollow: unfollowActionCreator,
+//   // setUsers: setUsersActionCreator,
+//   // setCurrentPage: setCurrentPageActionCreator,
+//   // setTotalUsersCount: setTotalUsersCountActionCreator,
+//   // toggleIsFetching: toggleIsFetchingActionCreator
+//
+//   // если названия одинаковые и справа и слева, то можно писать только то, что справа
+//   // да и во всех action creators поудалять в конце ActionCreator
+//   // и в другом файле тоже удалить последние слова в названиях
+//   follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers
+// }) (UsersComponent))
 
-  // если названия одинаковые и справа и слева, то можно писать только то, что справа
-  // да и во всех action creators поудалять в конце ActionCreator
-  // и в другом файле тоже удалить последние слова в названиях
-  follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers
-}) (UsersComponent)
+// вместо того, что сверху закомменчено
+export default compose<React.ComponentType>(
+  withAuthRedirect,
+  connect(mapStateToProps, {
+    follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers
+  })
+)(UsersComponent)

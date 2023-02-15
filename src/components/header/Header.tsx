@@ -7,6 +7,7 @@ type HeaderType = {
 }
 
 function Header(props: HeaderType) {
+
   return (
     <header className={classes.header}>
       <NavLink to="/">
@@ -27,7 +28,7 @@ function Header(props: HeaderType) {
         <li className={classes.nav__item}>
           {
             props.isAuth
-              ? <p>Nataly</p>
+              ? <p>{props.login}</p>
               : <NavLink to="/login" activeClassName={classes.active}>Login</NavLink>
           }
         </li>

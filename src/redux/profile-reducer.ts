@@ -57,6 +57,7 @@ const setUserProfile = (profile: ApiUserProfileType) => {
 }
 // thunk
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+  console.log(userId)
   usersApi.getProfile(userId)
     .then(response => {
       console.log(response.data)

@@ -3,7 +3,6 @@ import {UserType} from "../../../redux/users-reducer";
 import {User} from "./user/User";
 import React from "react";
 import {UsersPagePropsType} from "./UsersContainer";
-import {Redirect} from "react-router-dom";
 
 type PropsType = {
   usersPageType: UsersPagePropsType
@@ -17,8 +16,6 @@ export const Users = (props: PropsType) => {
   for (let i = 1; i <= props.usersPageType.maxPageCount; i++) {
     pages.push(i)
   }
-
-  if (!props.usersPageType.isAuth) return <Redirect to={"/login"} />
 
   return (
     <div>

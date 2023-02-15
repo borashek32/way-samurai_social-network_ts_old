@@ -1,5 +1,5 @@
 import classes from './Dialogs.module.sass'
-import {NavLink, Redirect} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 import {ButtonDefault} from "../../utils/buttons/ButtonDefault";
 import React from "react";
 import {DialogsPagePropsType} from "./DialogsContainer";
@@ -7,8 +7,6 @@ import {DialogsPagePropsType} from "./DialogsContainer";
 export type PropsType = DialogsPagePropsType
 
 export const Dialogs = (props: PropsType) => {
-
-  if (!props.isAuth) return <Redirect to={"/login"} />
 
   return (
     <div className={classes.messages}>
@@ -31,6 +29,7 @@ export const Dialogs = (props: PropsType) => {
       <div className={classes.messages__column_messages}>
         <h3 className={classes.messages__header}>{props.dialogsPage.messagesTitle}</h3>
         {props.dialogsPage.messages.map((m) => {
+
           return (
             <div key={m.id} className={classes.messageWrapper}>
               <p>{m.text}</p>
