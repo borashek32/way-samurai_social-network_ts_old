@@ -1,15 +1,12 @@
 import './App.sass';
 import HeaderContainer from "./components/header/HeaderContainer"
-import {Navbar} from "./components/navbar/Navbar"
 import {Footer} from "./components/footer/Footer"
 import {Route} from "react-router-dom"
-import DialogsContainer from "./components/content/dialogs/DialogsContainer";
-import UsersContainer from "./components/content/users/UsersContainer";
-import ProfileContainer from "./components/content/profile/ProfileContainer";
-import {Login} from "./components/login/Login";
-import {Dialogs} from "./components/content/dialogs/Dialogs";
-import {Users} from "./components/content/users/Users";
-import UsersComponent from "./components/content/users/UsersContainer";
+import DialogsContainer from "./components/content/dialogs/DialogsContainer"
+import UsersContainer from "./components/content/users/UsersContainer"
+import ProfileContainer from "./components/content/profile/ProfileContainer"
+import {Login} from "./components/login/Login"
+import NavbarContainer from "./components/navbar/NavbarContainer"
 
 
 const App = () => {
@@ -19,7 +16,7 @@ const App = () => {
       <div className="wrapper">
         <HeaderContainer />
         <main className="main">
-          <Navbar/>
+          <NavbarContainer/>
           <div className='content'>
             <div className='content__imgWrapper'>
               <img className='content__img'

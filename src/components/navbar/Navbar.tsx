@@ -1,12 +1,16 @@
 import classes from './Navbar.module.sass';
 import {NavLink} from "react-router-dom";
 
-export const Navbar = () => {
+type NavbarType = {
+  userId: number | null
+}
+
+export const Navbar = (props: NavbarType) => {
   return (
     <nav className={classes.nav}>
       <ul className={classes.nav__list}>
         <li className={classes.nav__item}>
-          <NavLink to="/profile/27310" activeClassName={classes.active}>Profile</NavLink>
+          <NavLink to={'/profile/' + props.userId} activeClassName={classes.active}>Profile</NavLink>
         </li>
         <li className={classes.nav__item}>
           <NavLink to="/dialogs" activeClassName={classes.active}>Dialogs</NavLink>
