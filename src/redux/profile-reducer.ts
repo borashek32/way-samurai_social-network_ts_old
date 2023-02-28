@@ -1,20 +1,23 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {usersApi} from "../api/api";
+import {profileApi, usersApi} from "../api/api";
 
 const ADD_POST = "ADD_POST"
 const CHANGE_NEW_TEXT = "CHANGE_NEW_TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
+const SET_STATUS = "SET_STATUS"
 
 export type ActionsTypes = ReturnType<typeof addPost>
   | ReturnType<typeof changeNewText>
   | ReturnType<typeof setUserProfile>
+  | ReturnType<typeof setStatus>
 
 export type ProfilePageType = {
   title: string
   descForNewPost: string
   posts: Array<PostType>
   profile: ApiUserProfileType
+  status: string
 }
 export type PostType = {
   id: string
@@ -22,22 +25,21 @@ export type PostType = {
   desc: string
 }
 export type ApiUserProfileType = {
-  aboutMe: "good programmer"
+  aboutMe: string
   lookingForAJob: true
-  lookingForAJobDescription: "good work"
+  lookingForAJobDescription: string
   contacts: {
-    github: "1234"
-    vk: "1234"
-    facebook: "1234"
-    instagram: "1234"
-    twitter: "1234"
-    website: "1234"
-    youtube: "1234"
-    mainLink: "1234"
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
   }
   followed: true
-  status: "not work"
-  uniqueUrlName: "string"
+  uniqueUrlName: string
   fullName: string
   userId: string
   photos: {
@@ -46,43 +48,83 @@ export type ApiUserProfileType = {
   }
 }
 
+
 export const addPost = () => {
-  return { type: ADD_POST } as const
+  return {type: ADD_POST} as const
 }
 export const changeNewText = (newDesc: string) => {
-  return { type: CHANGE_NEW_TEXT, descForNewPost: newDesc } as const
+  return {type: CHANGE_NEW_TEXT, descForNewPost: newDesc} as const
 }
 const setUserProfile = (profile: ApiUserProfileType) => {
-  return { type: SET_USER_PROFILE, profile } as const
+  return {type: SET_USER_PROFILE, profile} as const
 }
-// thunk
+const setStatus = (status: string) => {
+  return {type: SET_STATUS, status} as const
+}
+
+// thunks
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
-  console.log(userId)
   usersApi.getProfile(userId)
     .then(response => {
-      console.log(response.data)
-      dispatch(setUserProfile(response.data))
+        dispatch(setUserProfile(response.data))
+      })
+}
+export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+  profileApi.getStatus(userId)
+    .then(response => {
+        dispatch(setStatus(response.data))
+      })
+}
+export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+  profileApi.updateStatus(status)
+    .then(response => {
+      if (response.data.codeResult === 0) dispatch(setStatus(status))
     })
 }
+
 
 const initialState: ProfilePageType = {
   title: "My posts",
   posts: [
-    {id: v1(), likes: 10, desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"},
-    {id: v1(), likes: 10, desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"},
-    {id: v1(), likes: 10, desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"},
-    {id: v1(), likes: 10, desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"},
-    {id: v1(), likes: 10, desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"},
-    {id: v1(), likes: 10, desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"}
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    },
+    {
+      id: v1(),
+      likes: 10,
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    }
   ] as PostType[],
   descForNewPost: "",
   profile: {
     fullName: "nataly",
-    aboutMe: "good programmer",
-    userId: "899",
+    aboutMe: "hi there",
+    userId: "",
     photos: {
-      small: "https://gamerwall.pro/uploads/posts/2022-06/1655668285_2-gamerwall-pro-p-koti-na-more-priroda-krasivo-foto-3.jpg",
-      large: "https://gamerwall.pro/uploads/posts/2022-06/1655668285_2-gamerwall-pro-p-koti-na-more-priroda-krasivo-foto-3.jpg",
+      small: "",
+      large: "",
     },
     lookingForAJob: true,
     lookingForAJobDescription: "good work",
@@ -97,9 +139,9 @@ const initialState: ProfilePageType = {
       mainLink: "1234",
     },
     followed: true,
-    status: "not work",
     uniqueUrlName: "string"
-  }
+  },
+  status: "Enter your status",
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
@@ -126,6 +168,12 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       return {
         ...state,
         profile: action.profile
+      }
+    }
+    case SET_STATUS: {
+      return {
+        ...state,
+        status: action.status
       }
     }
     default: {

@@ -6,7 +6,7 @@ const SET_USER_DATA = "SET-USER-DATA"
 export type ActionsTypes = ReturnType<typeof setAuthUserData>
 
 export type UserType = {
-  userId: string | null
+  userId: number | null
   email: string | null
   login: string | null
   isFetching: boolean
@@ -36,7 +36,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
   }
 }
 
-export const setAuthUserData = (userId: string | null, email: string | null, login: string | null) => {
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => {
   return {type: SET_USER_DATA, data: {userId, email, login}} as const
 }
 

@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component<HeaderContainerType> {
 
   componentDidMount() {
     this.props.getAuthUserData()
-    // this.props.setAuthUserData(this.props.userId, this.props.email, this.props.login)
+    //this.props.setAuthUserData(this.props.userId, this.props.email, this.props.login)
   }
 
   render() {
@@ -23,18 +23,18 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   return {
     isAuth: state.auth.isAuth,
     login: state.auth.login,
-    // userId: state.auth.userId,
-    // email: state.auth.email
+    userId: state.auth.userId,
+    email: state.auth.email
   }
 }
 type mapStateToPropsType = {
   isAuth: boolean
   login: string | null
-  // userId: string | null
-  // email: string | null
+  userId: number | null
+  email: string | null
 }
 type mapDispatchToPropsType = {
-  setAuthUserData: (userId: string | null, email: string | null, login: string | null) => void
+  setAuthUserData: (userId: number | null, email: string | null, login: string | null) => void
   getAuthUserData: () => void
 }
 type HeaderContainerType = mapStateToPropsType & mapDispatchToPropsType

@@ -14,8 +14,6 @@ export const usersApi = {
       .then(response => {
         return response.data
       })
-    // the same shorter
-    // .then(response => response.data)
   },
   follow(userId: string) {
     return instance.post(`follow/${userId}`)
@@ -24,8 +22,21 @@ export const usersApi = {
     return instance.delete(`follow/${userId}`)
   },
   getProfile(userId: string) {
-    return instance.get(`profile/` + userId)
+    console.warn("You use an old method")
+    return profileApi.getProfile(userId)
   },
+}
+
+export const profileApi = {
+  getProfile(userId: string) {
+    return instance.get(`profile/${userId}`)
+  },
+  getStatus(userId: string) {
+    return instance.get(`profile/status/${userId}`)
+  },
+  updateStatus(status: string) {
+    return instance.put('profile/status/', {status: status} )
+  }
 }
 
 export const authAPI = {

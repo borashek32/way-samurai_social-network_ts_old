@@ -18,19 +18,12 @@ export const User = (props: PropsType) => {
       <div className={s.userContainer}>
         <NavLink to={"/profile/" + props.user.id}>
           <div className={s.user}>
-            {
-              props.user.photos.small
-                ? <img src={props.user.photos.large} alt="avatar" className={s.user__ava}/>
-                : <img src="https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixlib=rb-4.0.
-              3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1nfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-                       alt="avatar" className={s.user__ava}/>
-            }
+            <img src={props.user.photos.large} alt="avatar" className={s.user__ava}/>
           </div>
         </NavLink>
         <div className={classes.post__content}>
-          <div className={s.user__name}>{props.user.name}</div>
+          <div className={s.user__name}>{props.user.name} {props.user.id}</div>
           <div className={s.user__info}>Status: {props.user.status}</div>
-          <div className={s.user__info}>Location: Turkey, Alanya</div>
         </div>
       </div>
       <div className={s.user__buttons}>

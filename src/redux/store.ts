@@ -1,5 +1,5 @@
 import {v1} from "uuid"
-import {addPost, changeNewText, profileReducer} from './profile-reducer'
+import {addPost, changeNewText} from './profile-reducer'
 import {dialogsReducer, sendMessageActionCreator, updateMessageActionCreator} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 
