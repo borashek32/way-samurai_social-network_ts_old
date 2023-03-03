@@ -2,7 +2,7 @@ import classes from "./Posts.module.sass";
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, minLengthCreator, required} from "../../../utils/validation/FieldValidation";
-import {TextArea, TextAreaType} from "../../../utils/textarea/TextArea";
+import {TextArea} from "../../../utils/textarea/TextArea";
 
 
 export type AddPostFormType = {

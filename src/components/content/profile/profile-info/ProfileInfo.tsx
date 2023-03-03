@@ -37,7 +37,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
           <p className={classes.profile__item}>Facebook: {props.profile.contacts.facebook}</p>
           <p className={classes.profile__item}>Github: {props.profile.contacts.github}</p>
           <p className={classes.profile__item}>About Me: {props.profile.aboutMe}</p>
-          <p className={classes.profile__item}>Work: {props.profile.lookingForAJob ? "looking for a job" : "already hired"}</p>
+          <p className={classes.profile__item}>Work: {props.profile.lookingForAJob ? "already hired" : "looking for a job"}</p>
         </div>
       </div>
     </>

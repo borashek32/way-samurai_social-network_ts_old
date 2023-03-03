@@ -5,10 +5,10 @@ export const required = (value: string) => {
 
 export const minLengthCreator = (minLength: number) => (value: string) => {
   if (value.length > minLength) return undefined
-  return `Min length is less than ${minLength} symbols`
+  return `Min length is ${minLength} symbols`
 }
 
 export const maxLengthCreator = (maxLength: number) => (value: string) => {
-  if (value.length > maxLength) return undefined
-  return `Max length is more than ${maxLength} symbols`
+  if (value.length < maxLength) return undefined
+  return `Max length is ${maxLength} symbols`
 }
