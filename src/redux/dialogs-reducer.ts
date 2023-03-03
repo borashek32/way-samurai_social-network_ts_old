@@ -1,13 +1,16 @@
 import {v1} from "uuid";
+import {AddMessageFormType} from "../components/content/dialogs/AddMessageForm";
 
-export type ActionsTypes = ReturnType<typeof sendMessageActionCreator> | ReturnType<typeof updateMessageActionCreator>
+
+const SEND_MESSAGE = "SEND_MESSAGE"
+
+export type ActionsTypes = ReturnType<typeof sendMessageActionCreator>
 
 export type DialogPageType = {
   dialogsTitle: string
   dialogs: Array<DialogType>
   messagesTitle: string
   messages: Array<MessageType>
-  newMessageBody: string
 }
 export type MessageType = {
   id: string
@@ -33,27 +36,16 @@ const initialState: DialogPageType = {
     {id: v1(), text: "Lorem ipsum dolor"},
     {id: v1(), text: "Lorem ipsum dolor"},
     {id: v1(), text: "Lorem ipsum dolor"}
-  ] as MessageType[],
-  newMessageBody: ""
+  ] as MessageType[]
 }
 
-export const dialogsReducer = (state = initialState, action: any) => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
   switch (action.type) {
-    case "SEND_MESSAGE": {
-      const newMessage: MessageType = {
-        id: v1(),
-        text: state.newMessageBody
-      }
+    case SEND_MESSAGE: {
+      debugger
       return {
         ...state,
-        messages: [...state.messages, newMessage],
-        newMessageBody: ""
-      }
-    }
-    case "UPDATE_NEW_MESSAGE_BODY": {
-      return {
-        ...state,
-        newMessageBody: action.text
+        messages: [...state.messages, {id: v1(), message: action.newMessageBody}]
       }
     }
     default: {
@@ -62,9 +54,6 @@ export const dialogsReducer = (state = initialState, action: any) => {
   }
 }
 
-export const sendMessageActionCreator = () => {
-  return {type: "SEND_MESSAGE"} as const
-}
-export const updateMessageActionCreator = (newText: string) => {
-  return {type: "UPDATE_NEW_MESSAGE_BODY", text: newText} as const
+export const sendMessageActionCreator = (newMessageBody: string) => {
+  return {type: SEND_MESSAGE, newMessageBody} as const
 }

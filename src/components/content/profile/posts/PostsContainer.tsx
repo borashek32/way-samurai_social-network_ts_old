@@ -1,16 +1,15 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {Posts} from "./Posts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../../redux/redux-store";
 import {Dispatch} from "redux";
-import {addPost, changeNewText, ProfilePageType} from "../../../../redux/profile-reducer";
+import {addPostAC, ProfilePageType} from "../../../../redux/profile-reducer";
 
 type MapStatePropsType = {
   profilePage: ProfilePageType
 }
 type MapDispatchToProps = {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-  addPost: () => void
+  addPost: (descForNewPost: string) => void
 }
 
 export type PostsPagePropsType = MapStatePropsType & MapDispatchToProps
@@ -23,11 +22,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
-      dispatch(changeNewText(e.currentTarget.value))
-    },
-    addPost: () => {
-      dispatch(addPost())
+    addPost: (descForNewPost: string) => {
+      dispatch(addPostAC(descForNewPost))
     }
   }
 }

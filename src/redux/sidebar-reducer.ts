@@ -1,4 +1,4 @@
-import {SidebarType} from "./store";
+import {SidebarType} from "../../store";
 
 const initialState = {}
 

@@ -3,12 +3,10 @@ import {Dispatch} from "redux";
 import {profileApi, usersApi} from "../api/api";
 
 const ADD_POST = "ADD_POST"
-const CHANGE_NEW_TEXT = "CHANGE_NEW_TEXT"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 
-export type ActionsTypes = ReturnType<typeof addPost>
-  | ReturnType<typeof changeNewText>
+export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof setUserProfile>
   | ReturnType<typeof setStatus>
 
@@ -49,11 +47,8 @@ export type ApiUserProfileType = {
 }
 
 
-export const addPost = () => {
-  return {type: ADD_POST} as const
-}
-export const changeNewText = (newDesc: string) => {
-  return {type: CHANGE_NEW_TEXT, descForNewPost: newDesc} as const
+export const addPostAC = (descForNewPost: string) => {
+  return {type: ADD_POST, descForNewPost} as const
 }
 const setUserProfile = (profile: ApiUserProfileType) => {
   return {type: SET_USER_PROFILE, profile} as const
@@ -141,7 +136,7 @@ const initialState: ProfilePageType = {
     followed: true,
     uniqueUrlName: "string"
   },
-  status: "Enter your status",
+  status: "",
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
@@ -150,18 +145,12 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       let newPost: PostType = {
         id: v1(),
         likes: 0,
-        desc: state.descForNewPost
+        desc: action.descForNewPost
       }
       return {
         ...state,
         descForNewPost: "",
         posts: [...state.posts, newPost]
-      }
-    }
-    case CHANGE_NEW_TEXT: {
-      return {
-        ...state,
-        descForNewPost: action.descForNewPost
       }
     }
     case SET_USER_PROFILE: {

@@ -28,8 +28,8 @@ export const Users = (props: PropsType) => {
                 className={props.usersPageType.currentPage === p ? classes.selectedPage : ''}
                 onClick={(e) => props.onPageChanged(p)}
               >
-                  {p}
-                </span>
+                {p}
+              </span>
             )
           })
         }

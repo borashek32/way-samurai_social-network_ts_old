@@ -1,12 +1,17 @@
 import classes from './Dialogs.module.sass'
 import {NavLink} from "react-router-dom"
-import {ButtonDefault} from "../../utils/buttons/ButtonDefault";
 import React from "react";
 import {DialogsPagePropsType} from "./DialogsContainer";
+import {AddMessageFormType, AddMessageReduxForm} from "./AddMessageForm";
+
 
 export type PropsType = DialogsPagePropsType
 
 export const Dialogs = (props: PropsType) => {
+
+  const addNewMessage = (formData: AddMessageFormType) => {
+    props.onSendMessageClick(formData.newMessageBody)
+  }
 
   return (
     <div className={classes.messages}>
@@ -36,19 +41,7 @@ export const Dialogs = (props: PropsType) => {
             </div>
           )
         })}
-        <div className={classes.addMessageWrapper}>
-          <textarea
-            rows={3}
-            value={props.dialogsPage.newMessageBody}
-            onChange={props.onNewMessageChange}
-            placeholder={"Enter your message"}
-            className={classes.addPost__textarea}
-          ></textarea>
-          <ButtonDefault
-            name={'Add message'}
-            callback={props.onSendMessageClick}
-          />
-        </div>
+        <AddMessageReduxForm onSubmit={addNewMessage} />
       </div>
     </div>
   );
