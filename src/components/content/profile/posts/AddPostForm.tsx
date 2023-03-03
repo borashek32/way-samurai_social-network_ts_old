@@ -2,6 +2,7 @@ import classes from "./Posts.module.sass";
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, minLengthCreator, required} from "../../../utils/validation/FieldValidation";
+import {TextArea, TextAreaType} from "../../../utils/textarea/TextArea";
 
 
 export type AddPostFormType = {
@@ -17,8 +18,7 @@ export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props)
     <form onSubmit={props.handleSubmit} className={classes.post__content}>
       <Field
         name={"descForNewPost"}
-        component={"textarea"}
-        className={classes.addPost__textarea}
+        component={TextArea}
         placeholder={"Type here to publish a new post"}
         validate={[required, minLength, maxLength]}
       />

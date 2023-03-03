@@ -10,6 +10,7 @@ export type PropsType = DialogsPagePropsType
 export const Dialogs = (props: PropsType) => {
 
   const addNewMessage = (formData: AddMessageFormType) => {
+    debugger
     props.onSendMessageClick(formData.newMessageBody)
   }
 
@@ -17,11 +18,12 @@ export const Dialogs = (props: PropsType) => {
     <div className={classes.messages}>
       <div className={classes.messages__column_user}>
         <h3 className={classes.messages__header}>{props.dialogsPage.dialogsTitle}</h3>
+
         {props.dialogsPage.dialogs.map((dialog) => {
           let path = "/dialogs/" + dialog.id;
           return (
             <div className={classes.messages__user_wrapper} key={dialog.id}>
-              <NavLink key={dialog.id} to={path} className={classes.messages__user} activeClassName={classes.active}>
+              <NavLink to={path} className={classes.messages__user} activeClassName={classes.active}>
                 <img className={classes.messages__user_img}
                      src=""
                      alt="logo" width="30px"/>

@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {AddMessageFormType} from "../components/content/dialogs/AddMessageForm";
 
 
 const SEND_MESSAGE = "SEND_MESSAGE"
@@ -45,7 +44,7 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
       debugger
       return {
         ...state,
-        messages: [...state.messages, {id: v1(), message: action.newMessageBody}]
+        messages: [...state.messages, {id: v1(), text: action.newMessageBody}]
       }
     }
     default: {
