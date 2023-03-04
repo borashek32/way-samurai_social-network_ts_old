@@ -11,6 +11,7 @@ export type UserType = {
   login: string | null
   isFetching: boolean
   isAuth: boolean
+  password: string | null
 }
 
 const initialState: UserType = {
@@ -18,7 +19,8 @@ const initialState: UserType = {
   email: null,
   login: null,
   isFetching: false,
-  isAuth: false
+  isAuth: false,
+  password: null
 }
 
 export const authReducer = (state = initialState, action: ActionsTypes): UserType => {
@@ -26,7 +28,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
     case SET_USER_DATA: {
       return {
         ...state,
-        ...action.data,
+        ...action.payload,
         isAuth: true
       }
     }
@@ -36,15 +38,33 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
   }
 }
 
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => {
-  return {type: SET_USER_DATA, data: {userId, email, login}} as const
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+  return {type: SET_USER_DATA, payload: {userId, email, login, isAuth}} as const
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
+export const getAuthUserData: any = () => (dispatch: Dispatch) => {
   authAPI.me().then((response) => {
     if (response.data.resultCode === 0) {
       const { id, email, login } = response.data.data
-      dispatch(setAuthUserData(id, email, login))
+      dispatch(setAuthUserData(id, email, login, true))
     }
   })
+}
+
+export const login = (email: string, password: string, rememberMe = false) => (dispatch: Dispatch) => {
+  authAPI.login(email, password, rememberMe, true)
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+      }
+  })
+}
+
+export const logout = () => (dispatch: Dispatch) => {
+  authAPI.logout()
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+      }
+    })
 }
