@@ -43,9 +43,9 @@ export const Dialogs = (props: PropsType) => {
               </div>
             )
           })}
+          <AddMessageReduxForm onSubmit={addNewMessage} />
         </div>
       </div>
-      <AddMessageReduxForm onSubmit={addNewMessage} />
     </div>
   );
 }

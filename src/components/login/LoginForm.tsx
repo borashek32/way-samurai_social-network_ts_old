@@ -5,7 +5,7 @@ import React from "react";
 
 
 export type LoginFormType = {
-  login: string
+  email: string
   password: string
   rememberMe: boolean
 }
@@ -19,11 +19,11 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
       className={s.loginForm}
     >
       <div className={s.loginInputGroup}>
-        <label htmlFor="#">User Name</label>
+        <label htmlFor="#">User Email</label>
         <Field
           component={"input"}
-          name={"login"}
-          placeholder={"Enter your login"}
+          name={"email"}
+          placeholder={"Enter your email"}
           className={s.loginInput}
           type="text"
         />
@@ -35,7 +35,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
           name={"password"}
           placeholder={"Enter your password"}
           className={s.loginInput}
-          type="text"
+          type="password"
         />
       </div>
       <div className={s.loginInputGroupRememberMe}>

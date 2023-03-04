@@ -5,7 +5,7 @@ import {Route} from "react-router-dom"
 import DialogsContainer from "./components/content/dialogs/DialogsContainer"
 import UsersContainer from "./components/content/users/UsersContainer"
 import ProfileContainer from "./components/content/profile/ProfileContainer"
-import {Login} from "./components/login/Login"
+import Login from "./components/login/Login"
 import NavbarContainer from "./components/navbar/NavbarContainer"
 
 
