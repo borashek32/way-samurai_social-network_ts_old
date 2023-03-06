@@ -24,11 +24,12 @@ export const ProfileInfo = (props: ProfileInfoType) => {
       <div className={classes.profile}>
         <div className={classes.profile__imgWrapper}>
           <img width="150px"
-               className={classes.author__logo}
-               src={props.profile.photos.small
-                ? props.profile.photos.small
-                : "https://gamerwall.pro/uploads/posts/2022-06/1655668285_2-gamerwall-pro-p-koti-na-more-priroda-krasivo-foto-3.jpg"}
-               alt="img"/>
+             className={classes.author__logo}
+             src={props.profile.photos.small
+               ? props.profile.photos.small
+               : "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=620&quality=45&dpr=2&s=none"
+             }
+             alt="img"/>
         </div>
         <div className={classes.profile__info}>
           <p className={classes.profile__item}>Nickname: {props.profile.uniqueUrlName}</p>

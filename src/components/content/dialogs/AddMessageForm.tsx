@@ -14,6 +14,7 @@ const minLength = minLengthCreator(3)
 const maxLength = maxLengthCreator(7)
 
 export const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => {
+
   return (
     <form
       className={classes.addMessageWrapper}

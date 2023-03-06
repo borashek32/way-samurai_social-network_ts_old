@@ -18,12 +18,14 @@ type MapDispatchToProps = {
 export type DialogsPagePropsType = MapStatePropsType & MapDispatchToProps
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+
   return {
     dialogsPage: state.dialogsPage
   }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
+
   return {
     onSendMessageClick: (newMessageBody: string) => {
       dispatch(sendMessageActionCreator(newMessageBody))

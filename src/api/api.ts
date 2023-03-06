@@ -15,23 +15,23 @@ export const usersApi = {
         return response.data
       })
   },
-  follow(userId: string) {
+  follow(userId: number | null) {
     return instance.post(`follow/${userId}`)
   },
-  unfollow(userId: string) {
+  unfollow(userId: number | null) {
     return instance.delete(`follow/${userId}`)
   },
-  getProfile(userId: string) {
+  getProfile(userId: number | null) {
     console.warn("You use an old method")
     return profileApi.getProfile(userId)
   },
 }
 
 export const profileApi = {
-  getProfile(userId: string) {
+  getProfile(userId: number | null) {
     return instance.get(`profile/${userId}`)
   },
-  getStatus(userId: string) {
+  getStatus(userId: number | null) {
     return instance.get(`profile/status/${userId}`)
   },
   updateStatus(status: string) {

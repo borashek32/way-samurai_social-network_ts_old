@@ -1,7 +1,9 @@
-import s from './LoginForm.module.sass'
-import classes from './../content/users/user/User.module.sass'
+import s from './LoginForm.module.sass';
+import classes from './../content/users/user/User.module.sass';
+import classesTA from "../utils/textarea/TextArea.module.sass";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import React from "react";
+import {Input} from "../utils/input/Input";
 
 
 export type LoginFormType = {
@@ -18,24 +20,29 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
       action="#"
       className={s.loginForm}
     >
+      {props.error === "Incorrect Email or Password"
+        ? <span className={classesTA.erroredSpan}>Incorrect Email or Password</span>
+        : ""
+      }
       <div className={s.loginInputGroup}>
-        <label htmlFor="#">User Email</label>
+        <label className={s.loginInputLabel} htmlFor="#">User Email</label>
         <Field
-          component={"input"}
+          component={Input}
           name={"email"}
           placeholder={"Enter your email"}
-          className={s.loginInput}
-          type="text"
+          type={"text"}
+          error={props.error === "Please enter your Email" || props.error === "Enter valid Email"
+            ? props.error : ""}
         />
       </div>
       <div className={s.loginInputGroup}>
-        <label htmlFor="#">Password</label>
+        <label className={s.loginInputLabel} htmlFor="#">Password</label>
         <Field
-          component={"input"}
+          component={Input}
           name={"password"}
           placeholder={"Enter your password"}
-          className={s.loginInput}
-          type="password"
+          type={"password"}
+          error={props.error === "Enter your password" ? props.error : ""}
         />
       </div>
       <div className={s.loginInputGroupRememberMe}>
@@ -46,11 +53,12 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
           component={"input"}
           name={"rememberMe"}
           className={s.loginRememberMe}
-          type="checkbox"
+          type={"checkbox"}
         />
       </div>
       <button
         className={classes.button}
+        style={{marginTop: '15px'}}
       >
         Login
       </button>

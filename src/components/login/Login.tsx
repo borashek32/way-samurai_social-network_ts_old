@@ -13,16 +13,15 @@ const Login = (props: LoginContainerType) => {
     props.login(formData.email, formData.password, formData.rememberMe)
   }
 
-  // if (props.isAuth) {
-  //   return <Redirect to={'/profile'} />
-  // }
+  if (props.isAuth) {
+    return <Redirect to={`/profile/${props.userId}`}/>
+  }
 
   return (
     <div className={s.loginWrapper}>
       <h2 className={classes.posts__header}>Login</h2>
-      {props.isAuth
-        ? <Redirect to={'/profile/' + props.userId} />
-        : <LoginReduxForm onSubmit={onSubmit} />}
+
+      <LoginReduxForm onSubmit={onSubmit}/>
     </div>
   )
 }
@@ -32,6 +31,12 @@ type mapStateToPropsType = {
   userId: number | null
 }
 
+type mapDispatchToPropsType = {
+  login: (email: string, password: string, rememberMe: boolean) => void
+}
+type LoginContainerType = mapStateToPropsType & mapDispatchToPropsType
+
+
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   return {
     isAuth: state.auth.isAuth,
@@ -39,10 +44,6 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   }
 }
 
-type mapDispatchToPropsType = {
-  login: (email: string, password: string, rememberMe: boolean) => void
-}
 
-type LoginContainerType = mapStateToPropsType & mapDispatchToPropsType
 
 export default connect(mapStateToProps, {login})(Login)

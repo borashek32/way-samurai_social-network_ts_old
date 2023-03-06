@@ -39,7 +39,7 @@ export type ApiUserProfileType = {
   followed: true
   uniqueUrlName: string
   fullName: string
-  userId: string
+  userId: number | null
   photos: {
     small: string
     large: string
@@ -58,13 +58,13 @@ const setStatus = (status: string) => {
 }
 
 // thunks
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number | null) => (dispatch: Dispatch) => {
   usersApi.getProfile(userId)
     .then(response => {
         dispatch(setUserProfile(response.data))
       })
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+export const getStatus = (userId: number | null) => (dispatch: Dispatch) => {
   profileApi.getStatus(userId)
     .then(response => {
         dispatch(setStatus(response.data))
@@ -116,7 +116,7 @@ const initialState: ProfilePageType = {
   profile: {
     fullName: "nataly",
     aboutMe: "hi there",
-    userId: "",
+    userId: null,
     photos: {
       small: "",
       large: "",

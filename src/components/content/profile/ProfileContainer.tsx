@@ -1,22 +1,17 @@
 import React from "react";
 import {Profile} from "./Profile";
-import {
-  ApiUserProfileType,
-  getStatus,
-  getUserProfile,
-  ProfilePageType,
-  updateStatus
-} from "../../../redux/profile-reducer";
+import {ApiUserProfileType, getStatus, getUserProfile, ProfilePageType, updateStatus} from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {Preloader} from "../../utils/preloader/Preloader";
 
 type PathParamsType = {
-  userId: string
+  userId: number | null
 }
-type ProfilePagePropsType = RouteComponentProps<PathParamsType> & OwnPropsType
+type ProfilePagePropsType = RouteComponentProps<any> & OwnPropsType
 
 type MapStatePropsType = {
   userId: number | null
@@ -25,21 +20,20 @@ type MapStatePropsType = {
   status: string
 }
 type MapDispatchPropsType = {
-  getUserProfile: (userId: string) => void
-  getStatus: (userId: string) => void
+  getUserProfile: (userId: number | null) => void
+  getStatus: (userId: number | null) => void
   updateStatus: (status: string) => void
 }
 export type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 
 class ProfileContainer extends React.Component<ProfilePagePropsType> {
 
-  currentId = '0';
+  currentId: number | null = 0;
 
   requestDataProfile() {
     let userId = this.props.match.params.userId
 
     if (userId !== this.currentId) {
-
       this.props.getUserProfile(userId)
       this.props.getStatus(userId)
       this.currentId = userId
@@ -76,10 +70,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     status: state.profilePage.status
   }
 }
-
-// const WithUrlDataContainerComponent = withRouter(ProfileContainer)
-
-// export default withAuthRedirect(connect(mapStateToProps, {getUserProfile}) (WithUrlDataContainerComponent))
 
 export default compose<React.ComponentType>(
   connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),

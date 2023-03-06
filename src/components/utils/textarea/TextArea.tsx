@@ -11,9 +11,13 @@ export type TextAreaType = {
   autoFocus?: boolean
 }
 
-export const TextArea: React.FC<TextAreaType> = ({input, meta:{touched, error}, placeholder}) => {
+export const TextArea: React.FC<TextAreaType> = ({
+                                                   input,
+                                                   meta:{touched, error},
+                                                   placeholder
+}) => {
 
-  const cl = classes.addPost__textarea + ' ' + (error ? classes.erroredTextarea : '')
+  const cl = classes.addPost__textarea + ' ' + (touched && error ? classes.erroredTextarea : '')
 
   return (
     <div className={classes.dialogsAddMessageFormWrapper}>

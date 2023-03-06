@@ -6,9 +6,10 @@ import {NavLink} from "react-router-dom";
 
 type PropsType = {
   user: UserType
-  follow: (userId: string) => void
-  unfollow: (userId: string) => void
-  followingInProgress: Array<string>
+  follow: (userId: number | null) => void
+  unfollow: (userId: number | null) => void
+  // followingInProgress: Array<string>
+  followingInProgress: any
 }
 
 export const User = (props: PropsType) => {
@@ -30,7 +31,7 @@ export const User = (props: PropsType) => {
         {!props.user.followed
           ? <button
               className={s.button}
-              disabled={props.followingInProgress.some(id => id === props.user.id)}
+              disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
               onClick={() => {
                 props.follow(props.user.id)
               }
@@ -38,7 +39,7 @@ export const User = (props: PropsType) => {
 
           : <button
               className={s.button}
-              disabled={props.followingInProgress.some(id => id === props.user.id)}
+              disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
               onClick={() => {
                 props.unfollow(props.user.id)
               }

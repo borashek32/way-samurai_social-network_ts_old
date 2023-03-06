@@ -17,8 +17,8 @@ type MapStatePropsType = {
   followingInProgress: Array<string>
 }
 type MapDispatchToProps = {
-  follow: (userId: string) => void
-  unfollow: (userId: string) => void
+  follow: (userId: number | null) => void
+  unfollow: (userId: number | null) => void
   setUsers: (users: UserType[]) => void
   setCurrentPage: (pageNumber: number) => void
   setTotalUsersCount: (totalUsersCount: number) => void
@@ -71,46 +71,6 @@ const mapStateToProps = (state: AppStateType): { maxPageCount: 10;
   }
 }
 
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-//   return {
-//     follow: (userId: string) => {
-//       dispatch(followActionCreator(userId))
-//     },
-//     unfollow: (userId: string) => {
-//       dispatch(unfollowActionCreator(userId))
-//     },
-//     setUsers: (users: UserType[]) => {
-//       dispatch(setUsersActionCreator(users))
-//     },
-//     setCurrentPage: (pageNumber: number) => {
-//       dispatch(setCurrentPageActionCreator(pageNumber))
-//     },
-//     setTotalUsersCount: (totalUsersCount: number) => {
-//       dispatch(setTotalUsersCountActionCreator(totalUsersCount))
-//     },
-//     toggleIsFetching: (isFetching: boolean) => {
-//       dispatch(toggleIsFetchingActionCreator(isFetching))
-//     }
-//   }
-// }
-
-// вместо того, что сверху закомменчено
-// однотипные функции можно записать короче, как ниже
-// export default withAuthRedirect(connect(mapStateToProps, {
-//   // follow: followActionCreator,
-//   // unfollow: unfollowActionCreator,
-//   // setUsers: setUsersActionCreator,
-//   // setCurrentPage: setCurrentPageActionCreator,
-//   // setTotalUsersCount: setTotalUsersCountActionCreator,
-//   // toggleIsFetching: toggleIsFetchingActionCreator
-//
-//   // если названия одинаковые и справа и слева, то можно писать только то, что справа
-//   // да и во всех action creators поудалять в конце ActionCreator
-//   // и в другом файле тоже удалить последние слова в названиях
-//   follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers
-// }) (UsersComponent))
-
-// вместо того, что сверху закомменчено
 export default compose<React.ComponentType>(
   withAuthRedirect,
   connect(mapStateToProps, {

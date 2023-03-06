@@ -3,29 +3,31 @@ import {WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form";
 import classes from "../../utils/textarea/TextArea.module.sass";
 
 
-export type TextAreaType = {
+export type InputType = {
   input: WrappedFieldInputProps
   meta: WrappedFieldMetaProps
   placeholder?: string
   type?: HTMLInputTypeAttribute
   autoFocus?: boolean
+  error: string
 }
 
-export const TextArea: React.FC<TextAreaType> = ({
-                                                   input,
-                                                   meta:{touched, error},
-                                                   placeholder
+export const Input: React.FC<InputType> = ({
+                                            input,
+                                            meta: {touched},
+                                            placeholder,
+  error
 }) => {
 
   const cl = classes.addPost__textarea + ' ' + (error ? classes.erroredTextarea : '')
 
   return (
     <div className={classes.dialogsAddMessageFormWrapper}>
-      <textarea
+      <input
         {...input}
         placeholder={placeholder}
         className={cl}
-      ></textarea>
+      />
       {touched && error && <span className={classes.erroredSpan}>{error}</span>}
     </div>
   )
