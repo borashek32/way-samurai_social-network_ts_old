@@ -35,10 +35,10 @@ export const Users = (props: PropsType) => {
         }
       </div>
       <div className={classes.posts}>
-        <h2 className={classes.posts__header}>{props.usersPageType.usersPage.title}</h2>
+        <h2 className={classes.posts__header}>{props.usersPageType.title}</h2>
 
         {
-          props.usersPageType.usersPage.users.map((u: UserType) => {
+          props.usersPageType.users.map((u: UserType) => {
             return (
               <User
                 followingInProgress={props.usersPageType.followingInProgress}
