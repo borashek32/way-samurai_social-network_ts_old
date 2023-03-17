@@ -1,16 +1,16 @@
+import React, {FC} from "react";
 import './App.sass';
 import HeaderContainer from "./components/header/HeaderContainer"
-import {Footer} from "./components/footer/Footer"
-import {Route, withRouter} from "react-router-dom"
 import DialogsContainer from "./components/content/dialogs/DialogsContainer"
 import UsersContainer from "./components/content/users/UsersContainer"
 import ProfileContainer from "./components/content/profile/ProfileContainer"
 import Login from "./components/login/Login"
 import NavbarContainer from "./components/navbar/NavbarContainer"
-import React, {FC} from "react";
 import {connect} from "react-redux";
+import {Footer} from "./components/footer/Footer"
+import {Route, withRouter} from "react-router-dom"
 import {compose} from "redux";
-import {initializeApp, InitialType} from "./redux/app-reducer";
+import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/utils/preloader/Preloader";
 import {AppStateType} from "./redux/redux-store";
 
@@ -23,9 +23,10 @@ class App extends React.Component<any> {
 
   render() {
 
-    if (!this.props.initialized) {
+    if (!this.props.initialized && !this.props.isAuth) {
       return <Preloader />
     }
+
     return (
       <div className="container">
         <div className="wrapper">
@@ -59,14 +60,13 @@ class App extends React.Component<any> {
 
 type mapStateToPropsType = {
   initialized: boolean
+  isAuth: boolean
 }
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-
-  return {
-    initialized: state.app.initialized
-  }
-}
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
+  initialized: state.app.initialized,
+  isAuth: state.auth.isAuth
+})
 
 
 export default compose<FC>(

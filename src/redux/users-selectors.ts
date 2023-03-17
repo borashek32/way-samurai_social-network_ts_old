@@ -1,11 +1,16 @@
+import { UserType } from './auth-reducer';
+import { createSelector } from "reselect";
 import {AppStateType} from "./redux-store";
 
 export const getUsersPageTitle = (state: AppStateType) => {
   return state.usersPage.title
 }
-export const getUsersPage = (state: AppStateType) => {
+export const getUsersSuperSelector = (state: AppStateType) => {
   return state.usersPage.users
 }
+export const getUsersPage = createSelector(getUsersSuperSelector,(users) => {
+  return users.filter(u => true)
+})
 export const getPageSize = (state: AppStateType) => {
   return state.usersPage.pageSize
 }
@@ -24,3 +29,16 @@ export const getIsFetching = (state: AppStateType) => {
 export const getFollowingInProgress = (state: AppStateType) => {
   return state.usersPage.followingInProgress
 }
+
+
+
+// RESELECT
+// export const getUsersPage = (state: AppStateType) => {
+//   return state.usersPage.users
+// }
+// export const getUsersSelector = (state: AppStateType) => {
+//   return getUsersPage(state).filter(u => true)
+// }
+// export const getUsersSuperSelector = createSelector(getUsersPage,(users) => {
+//   return users.filter(u => true)
+// })

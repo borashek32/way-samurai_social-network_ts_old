@@ -1,13 +1,15 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {follow, requestUsers, setCurrentPage, toggleFollowingProgress, unfollow, UsersPageType, UserType} from "../../../redux/users-reducer";
+import {follow, requestUsers, setCurrentPage, toggleFollowingProgress, unfollow, 
+  UserType} from "../../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../../utils/preloader/Preloader";
 import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
 import {compose} from "redux";
-import { getCurrentPage, getFollowingInProgress, getIsFetching, getMaxPageCount, getPageSize, getTotalUsersCount, getUsersPage, getUsersPageTitle } from "../../../redux/users-selectors";
-import { stat } from "fs";
+import {getCurrentPage, getFollowingInProgress, getIsFetching, getMaxPageCount, getPageSize, 
+  getTotalUsersCount, getUsersPageTitle, getUsersPage} from "../../../redux/users-selectors";
+
 
 type MapStatePropsType = {
   users: UserType[]
@@ -57,6 +59,7 @@ class UsersComponent extends React.Component<UsersPagePropsType> {
 
 const mapStateToProps = (state: AppStateType) => {
   return {
+    // users: getUsersPage(state),
     users: getUsersPage(state),
     title: getUsersPageTitle(state),
     pageSize: getPageSize(state),

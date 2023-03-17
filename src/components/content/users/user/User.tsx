@@ -17,33 +17,33 @@ export const User = (props: PropsType) => {
   return (
     <div className={s.userWrapper}>
       <div className={s.userContainer}>
-        <NavLink to={"/profile/" + props.user.id}>
+        <NavLink to={"/profile/" + props.user.id} style={{display: "flex", gap: '50px'}}>
           <div className={s.user}>
             <img src={props.user.photos.large} alt="avatar" className={s.user__ava}/>
           </div>
+          <div className={classes.post__content}>
+            <div className={s.user__name}>{props.user.name} {props.user.id}</div>
+            <div className={s.user__info}>Status: {props.user.status}</div>
+          </div>
         </NavLink>
-        <div className={classes.post__content}>
-          <div className={s.user__name}>{props.user.name} {props.user.id}</div>
-          <div className={s.user__info}>Status: {props.user.status}</div>
-        </div>
       </div>
       <div className={s.user__buttons}>
         {!props.user.followed
           ? <button
-              className={s.button}
-              disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
-              onClick={() => {
-                props.follow(props.user.id)
-              }
-          }>Follow</button>
+            className={s.button}
+            disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
+            onClick={() => {
+              props.follow(props.user.id)
+            }
+            }>Follow</button>
 
           : <button
-              className={s.button}
-              disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
-              onClick={() => {
-                props.unfollow(props.user.id)
-              }
-          }>Unfollow</button>
+            className={s.button}
+            disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
+            onClick={() => {
+              props.unfollow(props.user.id)
+            }
+            }>Unfollow</button>
         }
       </div>
     </div>

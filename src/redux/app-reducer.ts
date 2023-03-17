@@ -17,6 +17,7 @@ const initialState: InitialType = {
 export const appReducer = (state = initialState, action: ActionsTypes): InitialType => {
   switch (action.type) {
     case INITIALIZED_SUCCESS: {
+      console.log(state.initialized)
       return {
         ...state,
         initialized: true
@@ -32,8 +33,9 @@ export const initializedSuccess = () => {
   return {type: INITIALIZED_SUCCESS}
 }
 
-export const initializeApp: any = () =>  async (dispatch: Dispatch) => {
-  let promise =  dispatch(getAuthUserData())
-  await Promise.all([promise])
+export const initializeApp: any = () => (dispatch: Dispatch) => {
+  let promise = dispatch(getAuthUserData())
+  // debugger
+  Promise.all([promise])
     dispatch(initializedSuccess())
 }

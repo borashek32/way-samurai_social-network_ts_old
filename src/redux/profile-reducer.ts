@@ -81,57 +81,57 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
 const initialState: ProfilePageType = {
   title: "My posts",
   posts: [
-    {
-      id: v1(),
-      likes: 10,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    },
-    {
-      id: v1(),
-      likes: 10,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    },
-    {
-      id: v1(),
-      likes: 10,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    },
-    {
-      id: v1(),
-      likes: 10,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    },
-    {
-      id: v1(),
-      likes: 10,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    },
-    {
-      id: v1(),
-      likes: 10,
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    }
+    // {
+    //   id: v1(),
+    //   likes: 10,
+    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    // },
+    // {
+    //   id: v1(),
+    //   likes: 10,
+    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    // },
+    // {
+    //   id: v1(),
+    //   likes: 10,
+    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    // },
+    // {
+    //   id: v1(),
+    //   likes: 10,
+    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    // },
+    // {
+    //   id: v1(),
+    //   likes: 10,
+    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    // },
+    // {
+    //   id: v1(),
+    //   likes: 10,
+    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
+    // }
   ] as PostType[],
   descForNewPost: "",
   profile: {
-    fullName: "nataly",
-    aboutMe: "hi there",
+    fullName: "",
+    aboutMe: "",
     userId: null,
     photos: {
       small: "",
       large: "",
     },
     lookingForAJob: true,
-    lookingForAJobDescription: "good work",
+    lookingForAJobDescription: "",
     contacts: {
-      github: "1234",
-      vk: "1234",
-      facebook: "1234",
-      instagram: "1234",
-      twitter: "1234",
-      website: "1234",
-      youtube: "1234",
-      mainLink: "1234",
+      github: "",
+      vk: "",
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      website: "",
+      youtube: "",
+      mainLink: "",
     },
     followed: true,
     uniqueUrlName: "string"
@@ -142,7 +142,6 @@ const initialState: ProfilePageType = {
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
   switch (action.type) {
     case ADD_POST: {
-      debugger
       let newPost: PostType = {
         id: v1(),
         likes: 0,

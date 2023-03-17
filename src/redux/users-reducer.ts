@@ -124,6 +124,7 @@ export const requestUsers = (currentPage: number, pageSize: number) => {
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
+        dispatch(setCurrentPage(currentPage))
     })
   }
 }

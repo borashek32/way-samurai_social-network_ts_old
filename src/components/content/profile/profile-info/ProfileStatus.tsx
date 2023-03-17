@@ -1,5 +1,5 @@
 import s from "../Profile.module.sass";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 
 type ProfileStatusType = {
   status: string
@@ -8,17 +8,19 @@ type ProfileStatusType = {
 
 export const ProfileStatus = (props: ProfileStatusType) => {
 
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState(props.status)
   const [editMode, setEditMode] = useState(false)
 
-  const onEditMode = () => {
+  useEffect(() => {
     setStatus(props.status)
+  }, [props.status])
+
+  const onEditMode = () => {
     setEditMode(true)
   }
   const offEditMode = () => {
     setEditMode(false)
     props.updateStatus(status)
-    setStatus(status)
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

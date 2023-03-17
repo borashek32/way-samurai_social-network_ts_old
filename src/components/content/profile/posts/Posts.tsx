@@ -5,8 +5,8 @@ import {PostsPagePropsType} from "./PostsContainer";
 import {AddPostFormType, AddPostReduxForm} from "./AddPostForm";
 
 
-export const Posts = (props: PostsPagePropsType) => {
-
+const Posts = React.memo<PostsPagePropsType>((props) => {
+  console.log('posts')
   const addPost = (formData: AddPostFormType) => {
     props.addPost(formData.descForNewPost)
   }
@@ -15,7 +15,7 @@ export const Posts = (props: PostsPagePropsType) => {
     <div className={classes.posts}>
       <h2 className={classes.posts__header}>{props.profilePage.title}</h2>
       <div className={classes.addPost}>
-        <AddPostReduxForm onSubmit={addPost} />
+        <AddPostReduxForm onSubmit={addPost}/>
       </div>
       {props.profilePage.posts.map((p) => {
         return (
@@ -29,4 +29,6 @@ export const Posts = (props: PostsPagePropsType) => {
       })}
     </div>
   );
-}
+})
+
+export default Posts
