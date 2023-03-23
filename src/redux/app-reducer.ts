@@ -17,7 +17,6 @@ const initialState: InitialType = {
 export const appReducer = (state = initialState, action: ActionsTypes): InitialType => {
   switch (action.type) {
     case INITIALIZED_SUCCESS: {
-      console.log(state.initialized)
       return {
         ...state,
         initialized: true

@@ -80,38 +80,7 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
 
 const initialState: ProfilePageType = {
   title: "My posts",
-  posts: [
-    // {
-    //   id: v1(),
-    //   likes: 10,
-    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    // },
-    // {
-    //   id: v1(),
-    //   likes: 10,
-    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    // },
-    // {
-    //   id: v1(),
-    //   likes: 10,
-    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    // },
-    // {
-    //   id: v1(),
-    //   likes: 10,
-    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    // },
-    // {
-    //   id: v1(),
-    //   likes: 10,
-    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    // },
-    // {
-    //   id: v1(),
-    //   likes: 10,
-    //   desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid maiores modi molestias optio quod suscipit? Facilis mollitia ut veritatis!"
-    // }
-  ] as PostType[],
+  posts: [] as PostType[],
   descForNewPost: "",
   profile: {
     fullName: "",

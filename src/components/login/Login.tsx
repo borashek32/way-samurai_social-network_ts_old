@@ -20,7 +20,9 @@ const Login = (props: LoginContainerType) => {
   return (
     <div className={s.loginWrapper}>
       <h2 className={classes.posts__header}>Login</h2>
-
+      <p>
+        To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a>
+      </p>
       <LoginReduxForm onSubmit={onSubmit}/>
     </div>
   )

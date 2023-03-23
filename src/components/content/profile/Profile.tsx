@@ -11,6 +11,8 @@ type PropsType = {
 
 export const Profile = (props: PropsType) => {
 
+  console.log(props)
+
   return (
     <div>
       <ProfileInfo
