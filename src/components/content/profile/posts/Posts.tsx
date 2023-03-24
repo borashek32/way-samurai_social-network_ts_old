@@ -18,7 +18,7 @@
 //   // }
 //
 //   render() {
-//     console.log('posts')
+//     ('posts')
 //
 //     const addPost = (formData: AddPostFormType) => {
 //       this.props.addPost(formData.descForNewPost)
@@ -56,7 +56,7 @@ import {AddPostFormType, AddPostReduxForm} from "./AddPostForm";
 
 
 const Posts = React.memo<PostsPagePropsType>((props) => {
-  console.log('posts')
+  ('posts')
   const addPost = (formData: AddPostFormType) => {
     props.addPost(formData.descForNewPost)
   }

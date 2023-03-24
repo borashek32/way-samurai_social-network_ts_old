@@ -14,8 +14,9 @@ const Login = (props: LoginContainerType) => {
   }
 
   if (props.isAuth) {
-    return <Redirect to={`/profile/${props.userId}`}/>
+    return <Redirect to={`profile/${props.userId}`}/>
   }
+  (props.isAuth, "ISAUTH")
 
   return (
     <div className={s.loginWrapper}>

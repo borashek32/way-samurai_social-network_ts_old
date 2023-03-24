@@ -18,6 +18,7 @@ type MapStatePropsType = {
   profile: ApiUserProfileType
   profilePage: ProfilePageType
   status: string
+  isAuth: boolean
 }
 type MapDispatchPropsType = {
   getUserProfile: (userId: number | null) => void
@@ -34,6 +35,7 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
     let userId = this.props.match.params.userId
 
     if (userId !== this.currentId) {
+      ('catch')
       this.props.getUserProfile(userId)
       this.props.getStatus(userId)
       this.currentId = userId
@@ -49,12 +51,14 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
   }
 
   render() {
+    (this.props)
     return (
       <Profile
         profile={this.props.profile}
         profilePage={this.props.profilePage}
         status={this.props.status}
         updateStatus={this.props.updateStatus}
+        isAuth={this.props.isAuth}
       />
     )
   }
@@ -62,12 +66,12 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
 
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
-
   return {
     userId: state.auth.userId,
     profile: state.profilePage.profile,
     profilePage: state.profilePage,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    isAuth: state.auth.isAuth,
   }
 }
 

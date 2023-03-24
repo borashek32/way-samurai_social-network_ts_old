@@ -43,16 +43,17 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 }
 
 export const getAuthUserData: any = () => (dispatch: Dispatch) => {
-  return authAPI.me().then((response) => {
-    if (response.data.resultCode === 0) {
-      const { id, email, login } = response.data.data
-      dispatch(setAuthUserData(id, email, login, true))
-    }
-  })
+  return authAPI.me()
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        const {id, email, login} = response.data.data
+        dispatch(setAuthUserData(id, email, login, true))
+        // debugger
+      }
+    })
 }
 
 export const login = (email: string, password: string, rememberMe = false) => (dispatch: Dispatch) => {
-
   authAPI.login(email, password, rememberMe, true)
     .then((response) => {
       if (response.data.resultCode === 0) {
@@ -61,7 +62,7 @@ export const login = (email: string, password: string, rememberMe = false) => (d
         let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
         dispatch(stopSubmit("login", {_error: message}))
       }
-  })
+    })
 }
 
 export const logout = () => (dispatch: Dispatch) => {
