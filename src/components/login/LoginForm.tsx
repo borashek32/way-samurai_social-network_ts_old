@@ -36,7 +36,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({error, ha
         />
       </div>
       <div className={s.loginInputGroup}>
-        <label className={s.loginInputLabel} htmlFor="#">Password</label>
+        <label data-testid={"password"} className={s.loginInputLabel} htmlFor={"password"}>Password</label>
         <Field
           component={Input}
           name={"password"}
@@ -50,6 +50,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({error, ha
           Remember Me
         </label>
         <Field
+          data-testid={"rememberMe"}
           component={"input"}
           name={"rememberMe"}
           className={s.loginRememberMe}

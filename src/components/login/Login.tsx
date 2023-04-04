@@ -21,13 +21,14 @@ const Login = (props: LoginContainerType) => {
     <div className={s.loginWrapper}>
       <div style={{lineHeight:'20px', fontSize: '12px', color: 'grey', textAlign: 'center'}}>
         <p>
-          To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a> or use common test account credentials:
+          To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a>
+          or use common test account credentials:
         </p>
         <p>
           Email: free@samuraijs.com, Password: free
         </p>
       </div>
-      <h2 className={classes.posts__header}>Login</h2>
+      <h2 data-testid={"login"} className={classes.posts__header}>Login</h2>
       <LoginReduxForm onSubmit={onSubmit}/>
     </div>
   )

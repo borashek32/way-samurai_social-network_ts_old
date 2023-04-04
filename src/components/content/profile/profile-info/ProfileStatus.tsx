@@ -33,6 +33,7 @@ export const ProfileStatus = (props: ProfileStatusType) => {
       {!editMode && <h4
         className={s.profile__status}
         onDoubleClick={onEditMode}
+        data-testid={"status"}
       >
         {status ? status : props.status}
       </h4>}
@@ -43,6 +44,8 @@ export const ProfileStatus = (props: ProfileStatusType) => {
         onChange={onChange}
         className={s.profile__statusInput}
         autoFocus
+        placeholder={"Enter status"}
+        data-testid={"Enter status"}
       />}
     </div>
   )

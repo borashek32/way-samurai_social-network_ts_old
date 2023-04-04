@@ -12,8 +12,6 @@ type PropsType = {
 
 export const Users = (props: PropsType) => {
 
-
-
   return (
     <div>
       <div>
