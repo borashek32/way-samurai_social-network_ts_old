@@ -3,6 +3,7 @@ import {UserType} from "../../../redux/users-reducer";
 import {User} from "./user/User";
 import React from "react";
 import {UsersPagePropsType} from "./UsersContainer";
+import {Paginator} from "./../../utils/pagination/Paginator";
 
 type PropsType = {
   usersPageType: UsersPagePropsType
@@ -11,28 +12,18 @@ type PropsType = {
 
 export const Users = (props: PropsType) => {
 
-  let pageCount: number = Math.ceil(props.usersPageType.totalUsersCount / props.usersPageType.pageSize)
-  let pages = []
-  for (let i = 1; i <= props.usersPageType.maxPageCount; i++) {
-    pages.push(i)
-  }
+
 
   return (
     <div>
       <div>
-        {
-          pages.map(p => {
-            return (
-              <span
-                key={p}
-                className={props.usersPageType.currentPage === p ? classes.selectedPage : ''}
-                onClick={(e) => props.onPageChanged(p)}
-              >
-                {p}
-              </span>
-            )
-          })
-        }
+        <Paginator
+          onPageChanged={props.onPageChanged}
+          currentPage={props.usersPageType.currentPage}
+          totalUsersCount={props.usersPageType.totalUsersCount}
+          maxPageCount={props.usersPageType.maxPageCount}
+          pageSize={props.usersPageType.pageSize}
+        />
       </div>
       <div className={classes.posts}>
         <h2 className={classes.posts__header}>{props.usersPageType.title}</h2>

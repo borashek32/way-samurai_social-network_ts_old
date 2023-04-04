@@ -1,7 +1,7 @@
 import s from "../Profile.module.sass";
 import {ChangeEvent, useEffect, useState} from "react";
 
-type ProfileStatusType = {
+export type ProfileStatusType = {
   status: string
   updateStatus: (status: string) => void
 }

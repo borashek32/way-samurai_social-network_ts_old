@@ -12,15 +12,15 @@ export type LoginFormType = {
   rememberMe: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({error, handleSubmit}) => {
 
   return (
     <form
-      onSubmit={props.handleSubmit}
+      onSubmit={handleSubmit}
       action="#"
       className={s.loginForm}
     >
-      {props.error === "Incorrect Email or Password"
+      {error === "Incorrect Email or Password"
         ? <span className={classesTA.erroredSpan}>Incorrect Email or Password</span>
         : ""
       }
@@ -31,8 +31,8 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
           name={"email"}
           placeholder={"Enter your email"}
           type={"text"}
-          error={props.error === "Please enter your Email" || props.error === "Enter valid Email"
-            ? props.error : ""}
+          error={error === "Please enter your Email" || error === "Enter valid Email"
+            ? error : ""}
         />
       </div>
       <div className={s.loginInputGroup}>
@@ -42,7 +42,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
           name={"password"}
           placeholder={"Enter your password"}
           type={"password"}
-          error={props.error === "Enter your password" ? props.error : ""}
+          error={error === "Enter your password" ? error : ""}
         />
       </div>
       <div className={s.loginInputGroupRememberMe}>
@@ -65,6 +65,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => 
     </form>
   )
 }
+
 
 export const LoginReduxForm = reduxForm<LoginFormType>({
   form: 'login',

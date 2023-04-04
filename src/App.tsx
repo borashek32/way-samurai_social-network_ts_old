@@ -40,13 +40,10 @@ class App extends React.Component<any> {
                      alt="sea"/>
               </div>
               <div className='content__desc'>
-
                 <Route path={"/"} exact component={ProfileContainer}/>
-
                 <Route path="/profile/:userId" component={ProfileContainer}/>
                 <Route path="/dialogs" component={DialogsContainer}/>
                 <Route path="/users" component={UsersContainer}/>
-
                 <Route path={"/login"} component={Login}/>
               </div>
             </div>
