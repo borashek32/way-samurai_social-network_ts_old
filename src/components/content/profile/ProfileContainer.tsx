@@ -23,7 +23,7 @@ type MapStatePropsType = {
   profile: ApiUserProfileType
   profilePage: ProfilePageType
   status: string
-  isAuth: boolean
+  isAuth: boolean | undefined
   isOwner: boolean
 }
 type MapDispatchPropsType = {

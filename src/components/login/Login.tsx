@@ -13,9 +13,10 @@ const Login = (props: LoginContainerType) => {
     props.login(formData.email, formData.password, formData.rememberMe)
   }
 
-  if (props.isAuth) {
+  if (!props.isAuth) {
     return <Redirect to={`profile/${props.userId}`}/>
   }
+
 
   return (
     <div className={s.loginWrapper}>
@@ -35,7 +36,7 @@ const Login = (props: LoginContainerType) => {
 }
 
 type mapStateToPropsType = {
-  isAuth: boolean
+  isAuth: boolean | undefined
   userId: number | null
 }
 
@@ -51,7 +52,5 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     userId: state.auth.userId
   }
 }
-
-
 
 export default connect(mapStateToProps, {login})(Login)

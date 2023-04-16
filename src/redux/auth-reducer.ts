@@ -11,7 +11,7 @@ export type UserType = {
   email: string | null
   login: string | null
   isFetching: boolean
-  isAuth: boolean
+  isAuth: boolean | undefined
   password: string | null
   isOwner: boolean
 }
@@ -21,7 +21,7 @@ const initialState: UserType = {
   email: null,
   login: null,
   isFetching: false,
-  isAuth: false,
+  isAuth: undefined,
   password: null,
   isOwner: false
 }
@@ -31,7 +31,10 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
     case SET_USER_DATA: {
       return {
         ...state,
-        ...action.payload
+        userId: action.payload.userId,
+        email: action.payload.email,
+        login: action.payload.login,
+        isAuth: action.payload.isAuth
       }
     }
     default: {
@@ -40,7 +43,12 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
   }
 }
 
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+export const setAuthUserData = (
+  userId: number | null,
+  email: string | null,
+  login: string | null,
+  isAuth: boolean | undefined
+) => {
   return {type: SET_USER_DATA, payload: {userId, email, login, isAuth}} as const
 }
 
@@ -50,6 +58,7 @@ export const getAuthUserData: any = () => async (dispatch: Dispatch) => {
     const {id, email, login} = response.data.data
     dispatch(setAuthUserData(id, email, login, true))
   }
+  else setAuthUserData(null,null,null,false)
 }
 
 export const login = (email: string, password: string, rememberMe = false) => async (dispatch: Dispatch) => {

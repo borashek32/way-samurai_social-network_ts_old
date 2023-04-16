@@ -24,7 +24,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   }
 }
 type mapStateToPropsType = {
-  isAuth: boolean
+  isAuth: boolean | undefined
   login: string | null
   userId: number | null
   email: string | null

@@ -2,7 +2,7 @@ import classes from './Header.module.sass';
 import {NavLink} from "react-router-dom";
 
 type HeaderType = {
-  isAuth: boolean
+  isAuth: boolean | undefined
   login: string | null
   logout: () => void
 }

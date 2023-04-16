@@ -40,11 +40,11 @@ class App extends React.Component<any> {
                      alt="sea"/>
               </div>
               <div className='content__desc'>
-                <Route path={"/"} exact component={ProfileContainer}/>
-                <Route path={"/profile/:userId"} exact component={ProfileContainer}/>
-                <Route path={"/dialogs"} exact component={DialogsContainer}/>
-                <Route path={"/users"} exact component={UsersContainer}/>
-                <Route path={"/login"} exact component={Login}/>
+                <Route path="/" exact component={ProfileContainer}/>
+                <Route path="/profile/:userId" exact component={ProfileContainer}/>
+                <Route path="/dialogs" exact component={DialogsContainer}/>
+                <Route path="/users" exact component={UsersContainer}/>
+                <Route path="/login" exact component={Login}/>
               </div>
             </div>
           </main>
@@ -57,7 +57,7 @@ class App extends React.Component<any> {
 
 type mapStateToPropsType = {
   initialized: boolean
-  isAuth: boolean
+  isAuth: boolean | undefined
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({

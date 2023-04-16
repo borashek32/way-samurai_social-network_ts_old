@@ -1,11 +1,10 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {DialogPageType, sendMessageActionCreator} from "../../../redux/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../../hoc/WithAuthRedirect";
-import {AddMessageFormType} from "./AddMessageForm";
 
 
 type MapStatePropsType = {
@@ -32,8 +31,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     }
   }
 }
-
-// export default withAuthRedirect(connect<MapStatePropsType, MapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps) (Dialogs))
 
 export default compose<React.ComponentType>(
   withAuthRedirect,
