@@ -13,7 +13,6 @@ type PropsType = {
 }
 
 export const Profile = (props: PropsType) => {
-  // (props.isAuth, "PROFILE IS AutH")
 
   return (
     <div>

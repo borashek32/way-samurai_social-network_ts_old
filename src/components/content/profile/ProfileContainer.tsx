@@ -41,7 +41,6 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
     let userId = this.props.match.params.userId
 
     if (userId !== this.currentId) {
-      // ('catch')
       this.props.getUserProfile(userId)
       this.props.getStatus(userId)
       this.currentId = userId
@@ -53,13 +52,13 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
   }
 
   componentDidUpdate(prevProps: Readonly<ProfilePagePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    if (this.props.match.params.userId !== this.props.match.params.userId) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.requestDataProfile()
     }
   }
 
   render() {
-    // (this.props)
+
     return (
       <Profile
         profile={this.props.profile}
