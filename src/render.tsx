@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 
 export const rerenderEntireTree = () => {
   ReactDOM.render(
-    <HashRouter>
+    <HashRouter basename={"/way-samurai_social-network_ts_old/"}>
       <Provider store={store}>
         <App />
       </Provider>

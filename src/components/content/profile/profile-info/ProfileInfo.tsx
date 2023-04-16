@@ -16,8 +16,6 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     return <Preloader/>
   }
 
-  console.log(props.isOwner)
-
   return (
     <>
       <ProfileStatus
