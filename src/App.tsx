@@ -41,10 +41,10 @@ class App extends React.Component<any> {
               </div>
               <div className='content__desc'>
                 <Route path={"/"} exact component={ProfileContainer}/>
-                <Route path="/profile/:userId" component={ProfileContainer}/>
-                <Route path="/dialogs" component={DialogsContainer}/>
-                <Route path="/users" component={UsersContainer}/>
-                <Route path={"/login"} component={Login}/>
+                <Route path={"/profile/:userId"} exact component={ProfileContainer}/>
+                <Route path={"/dialogs"} exact component={DialogsContainer}/>
+                <Route path={"/users"} exact component={UsersContainer}/>
+                <Route path={"/login"} exact component={Login}/>
               </div>
             </div>
           </main>

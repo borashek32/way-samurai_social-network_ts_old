@@ -12,11 +12,7 @@ type PropsType = {
 }
 
 export const Profile = (props: PropsType) => {
-  (props.isAuth, "PROFILE IS AutH")
-
-  // if (!props.isAuth) {
-  //   return <Redirect to={'/way-samurai_social-network_ts_old/login'} />
-  // }
+  // (props.isAuth, "PROFILE IS AutH")
 
   return (
     <div>

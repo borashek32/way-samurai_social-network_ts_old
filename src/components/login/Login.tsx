@@ -21,7 +21,7 @@ const Login = (props: LoginContainerType) => {
     <div className={s.loginWrapper}>
       <div style={{lineHeight:'20px', fontSize: '12px', color: 'grey', textAlign: 'center'}}>
         <p>
-          To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a>
+          To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}> here </a>
           or use common test account credentials:
         </p>
         <p>
