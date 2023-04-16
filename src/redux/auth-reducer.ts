@@ -13,6 +13,7 @@ export type UserType = {
   isFetching: boolean
   isAuth: boolean
   password: string | null
+  isOwner: boolean
 }
 
 const initialState: UserType = {
@@ -21,7 +22,8 @@ const initialState: UserType = {
   login: null,
   isFetching: false,
   isAuth: false,
-  password: null
+  password: null,
+  isOwner: false
 }
 
 export const authReducer = (state = initialState, action: ActionsTypes): UserType => {

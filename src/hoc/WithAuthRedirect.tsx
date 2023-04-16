@@ -24,8 +24,8 @@ export function withAuthRedirect <T>(Component: ComponentType<T>) {
 
     if (!isAuth) return <Redirect to={"/login"} />
 
-    return <Component {...restProps as T} />
-    // return <Component isAuth={props.isAuth} initialized={props.initialized} />
+    // return <Component {...restProps as T} />
+    return <Component isAuth={props.isAuth} initialized={props.initialized} {...restProps as T} />
   }
   return connect(MapStateToProps)(RedirectComponent)
 }

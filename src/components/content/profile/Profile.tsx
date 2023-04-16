@@ -9,6 +9,7 @@ type PropsType = {
   status: string
   updateStatus: (status: string) => void
   isAuth: boolean
+  isOwner: boolean
 }
 
 export const Profile = (props: PropsType) => {
@@ -20,6 +21,7 @@ export const Profile = (props: PropsType) => {
         profile={props.profile}
         status={props.status}
         updateStatus={props.updateStatus}
+        isOwner={props.isOwner}
       />
       <PostsContainer />
     </div>

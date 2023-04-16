@@ -7,6 +7,7 @@ type ProfileInfoType = {
   profile: ApiUserProfileType
   status: string
   updateStatus: (status: string) => void
+  isOwner: boolean
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -14,6 +15,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
   if (!props.profile) {
     return <Preloader/>
   }
+
+  console.log(props.isOwner)
 
   return (
     <>
@@ -29,7 +32,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                ? props.profile.photos.small
                : "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=620&quality=45&dpr=2&s=none"
              }
-             alt="img"/>
+             alt={props.profile.fullName + ' image'}/>
+          {props.isOwner && <input type="file" style={{marginTop: "20px"}}/>}
         </div>
         <div className={classes.profile__info}>
           <p className={classes.profile__item}>Nickname: {props.profile.uniqueUrlName}</p>
