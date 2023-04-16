@@ -23,9 +23,11 @@ class App extends React.Component<any> {
 
   render() {
 
-    if (!this.props.initialized && !this.props.isAuth) {
+    if (!this.props.initialized) {
       return <Preloader />
     }
+
+    console.log(this.props.initialized, this.props.isAuth)
 
     return (
       <div className="container">
@@ -57,12 +59,12 @@ class App extends React.Component<any> {
 
 type mapStateToPropsType = {
   initialized: boolean
-  isAuth: boolean | undefined
+  //isAuth: boolean
 }
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
   initialized: state.app.initialized,
-  isAuth: state.auth.isAuth
+  //isAuth: state.auth.isAuth
 })
 
 

@@ -23,7 +23,7 @@ type MapStatePropsType = {
   profile: ApiUserProfileType
   profilePage: ProfilePageType
   status: string
-  isAuth: boolean | undefined
+  isAuth: boolean
   isOwner: boolean
 }
 type MapDispatchPropsType = {
@@ -53,7 +53,7 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
   }
 
   componentDidUpdate(prevProps: Readonly<ProfilePagePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+    if (this.props.match.params.userId !== this.props.match.params.userId) {
       this.requestDataProfile()
     }
   }

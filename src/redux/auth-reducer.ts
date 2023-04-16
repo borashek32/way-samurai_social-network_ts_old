@@ -11,7 +11,7 @@ export type UserType = {
   email: string | null
   login: string | null
   isFetching: boolean
-  isAuth: boolean | undefined
+  isAuth: boolean
   password: string | null
   isOwner: boolean
 }
@@ -21,7 +21,7 @@ const initialState: UserType = {
   email: null,
   login: null,
   isFetching: false,
-  isAuth: undefined,
+  isAuth: false,
   password: null,
   isOwner: false
 }
@@ -30,11 +30,11 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
   switch (action.type) {
     case SET_USER_DATA: {
       return {
-        ...state,
-        userId: action.payload.userId,
-        email: action.payload.email,
-        login: action.payload.login,
-        isAuth: action.payload.isAuth
+        ...state, ...action.payload
+        // userId: action.payload.userId,
+        // email: action.payload.email,
+        // login: action.payload.login,
+        // isAuth: action.payload.isAuth
       }
     }
     default: {
@@ -47,7 +47,7 @@ export const setAuthUserData = (
   userId: number | null,
   email: string | null,
   login: string | null,
-  isAuth: boolean | undefined
+  isAuth: boolean
 ) => {
   return {type: SET_USER_DATA, payload: {userId, email, login, isAuth}} as const
 }

@@ -2,9 +2,10 @@ import classes from './Header.module.sass';
 import {NavLink} from "react-router-dom";
 
 type HeaderType = {
-  isAuth: boolean | undefined
+  isAuth: boolean
   login: string | null
   logout: () => void
+  userId: number | null
 }
 
 function Header(props: HeaderType) {
@@ -18,7 +19,7 @@ function Header(props: HeaderType) {
       </NavLink>
       <ul className={classes.header__menu}>
         <li className={classes.nav__item}>
-          <NavLink to="/profile/:userId" activeClassName={classes.active}>Profile</NavLink>
+          <NavLink to={"/profile/" + props.userId} activeClassName={classes.active}>Profile</NavLink>
         </li>
         <li className={classes.nav__item}>
           <NavLink to="/dialogs" activeClassName={classes.active}>Dialogs</NavLink>

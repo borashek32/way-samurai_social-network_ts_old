@@ -8,7 +8,7 @@ type PropsType = {
   profile: ApiUserProfileType
   status: string
   updateStatus: (status: string) => void
-  isAuth: boolean | undefined
+  isAuth: boolean
   isOwner: boolean
 }
 
