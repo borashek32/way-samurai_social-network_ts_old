@@ -2,6 +2,7 @@ import classes from "../Profile.module.sass";
 import {ApiUserProfileType} from "../../../../redux/profile-reducer";
 import {Preloader} from "../../../utils/preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
+import {ChangeEvent} from "react";
 
 type ProfileInfoType = {
   profile: ApiUserProfileType
@@ -14,6 +15,10 @@ export const ProfileInfo = (props: ProfileInfoType) => {
 
   if (!props.profile) {
     return <Preloader/>
+  }
+
+  const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+
   }
 
   return (
@@ -31,7 +36,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                : "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=620&quality=45&dpr=2&s=none"
              }
              alt={props.profile.fullName + ' image'}/>
-          {props.isOwner && <input type="file" style={{marginTop: "20px"}}/>}
+          {props.isOwner && <input type="file" style={{marginTop: "20px"}} onChange={onMainPhotoSelected}/>}
         </div>
         <div className={classes.profile__info}>
           <p className={classes.profile__item}>Nickname: {props.profile.uniqueUrlName}</p>

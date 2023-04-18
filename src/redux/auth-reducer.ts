@@ -31,10 +31,6 @@ export const authReducer = (state = initialState, action: ActionsTypes): UserTyp
     case SET_USER_DATA: {
       return {
         ...state, ...action.payload
-        // userId: action.payload.userId,
-        // email: action.payload.email,
-        // login: action.payload.login,
-        // isAuth: action.payload.isAuth
       }
     }
     default: {

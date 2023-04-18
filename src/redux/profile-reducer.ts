@@ -24,6 +24,10 @@ export type PostType = {
   likes: number
   desc: string
 }
+export type PhotoType = {
+  small: string
+  large: string
+}
 export type ApiUserProfileType = {
   aboutMe: string
   lookingForAJob: true
@@ -42,10 +46,7 @@ export type ApiUserProfileType = {
   uniqueUrlName: string
   fullName: string
   userId: number | null
-  photos: {
-    small: string
-    large: string
-  }
+  photos: PhotoType
 }
 
 

@@ -27,8 +27,6 @@ class App extends React.Component<any> {
       return <Preloader />
     }
 
-    console.log(this.props.initialized, this.props.isAuth)
-
     return (
       <div className="container">
         <div className="wrapper">

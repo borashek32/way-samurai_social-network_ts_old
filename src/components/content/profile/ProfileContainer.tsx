@@ -52,7 +52,7 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
   }
 
   componentDidUpdate(prevProps: Readonly<ProfilePagePropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+    if (+this.props.match.params.userId !== this.props.userId) {
       this.requestDataProfile()
     }
   }
@@ -66,7 +66,7 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
         status={this.props.status}
         updateStatus={this.props.updateStatus}
         isAuth={this.props.isAuth}
-        isOwner={!!this.props.match.params.userId}
+        isOwner={+this.props.match.params.userId === this.props.userId}
       />
     )
   }
