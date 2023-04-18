@@ -141,7 +141,6 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       }
     }
     case SAVE_PHOTO: {
-      debugger
       return {
         ...state,
         profile: {
