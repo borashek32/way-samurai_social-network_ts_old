@@ -3,8 +3,8 @@ import {Profile} from "./Profile";
 import {
   ApiUserProfileType,
   getStatus,
-  getUserProfile,
-  ProfilePageType,
+  getUserProfile, PhotoType,
+  ProfilePageType, savePhoto,
   updateStatus
 } from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
@@ -30,6 +30,7 @@ type MapDispatchPropsType = {
   getUserProfile: (userId: number | null) => void
   getStatus: (userId: number | null) => void
   updateStatus: (status: string) => void
+  savePhoto: (photo: File) => void
 }
 export type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -61,6 +62,7 @@ class ProfileContainer extends React.Component<ProfilePagePropsType> {
 
     return (
       <Profile
+        savePhoto={this.props.savePhoto}
         profile={this.props.profile}
         profilePage={this.props.profilePage}
         status={this.props.status}
@@ -87,7 +89,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 export default compose<React.ComponentType>(connect(mapStateToProps, {
     getUserProfile,
     getStatus,
-    updateStatus
+    updateStatus,
+    savePhoto
   }),
   withRouter,
   withAuthRedirect

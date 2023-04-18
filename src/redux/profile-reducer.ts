@@ -6,11 +6,13 @@ const ADD_POST = "profile/ADD_POST"
 const REMOVE_POST = "profile/REMOVE_POST"
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_STATUS = "profile/SET_STATUS"
+const SAVE_PHOTO = "profile/SAVE_PHOTO"
 
 export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof setUserProfile>
   | ReturnType<typeof setStatus>
   | ReturnType<typeof removePostAC>
+  | ReturnType<typeof savePhotoAC>
 
 export type ProfilePageType = {
   title: string
@@ -54,6 +56,7 @@ export const addPostAC = (descForNewPost: string) => ({type: ADD_POST, descForNe
 export const removePostAC = (postId: string) => ({type: REMOVE_POST, postId} as const)
 const setUserProfile = (profile: ApiUserProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
+const savePhotoAC = (photo: PhotoType) => ({type: SAVE_PHOTO, photo} as const)
 
 // thunks
 export const getUserProfile = (userId: number | null) => async (dispatch: Dispatch) => {
@@ -67,6 +70,11 @@ export const getStatus = (userId: number | null) => async (dispatch: Dispatch) =
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
   const response = await profileApi.updateStatus(status)
   if (response.data.codeResult === 0) dispatch(setStatus(status))
+}
+export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
+  const response = await profileApi.savePhoto(photo)
+
+  if (response.data.resultCode === 0) dispatch(savePhotoAC(response.data.data.photos))
 }
 
 
@@ -130,6 +138,16 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       return {
         ...state,
         status: action.status
+      }
+    }
+    case SAVE_PHOTO: {
+      debugger
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          photos: action.photo
+        }
       }
     }
     default: {

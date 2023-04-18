@@ -9,6 +9,7 @@ type ProfileInfoType = {
   status: string
   updateStatus: (status: string) => void
   isOwner: boolean
+  savePhoto: (photo: File) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
@@ -18,7 +19,9 @@ export const ProfileInfo = (props: ProfileInfoType) => {
   }
 
   const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-
+    if (e.target.files && e.target.files.length) {
+      props.savePhoto(e.target.files[0])
+    }
   }
 
   return (
@@ -36,7 +39,12 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                : "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=620&quality=45&dpr=2&s=none"
              }
              alt={props.profile.fullName + ' image'}/>
-          {props.isOwner && <input type="file" style={{marginTop: "20px"}} onChange={onMainPhotoSelected}/>}
+          {props.isOwner &&
+            <input
+              type="file"
+              style={{marginTop: "20px"}}
+              onChange={onMainPhotoSelected}
+            />}
         </div>
         <div className={classes.profile__info}>
           <p className={classes.profile__item}>Nickname: {props.profile.uniqueUrlName}</p>
