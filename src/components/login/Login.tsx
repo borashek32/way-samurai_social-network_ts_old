@@ -10,7 +10,7 @@ import {AppStateType} from "../../redux/redux-store";
 const Login = (props: LoginContainerType) => {
 
   const onSubmit = (formData: LoginFormType) => {
-    props.login(formData.email, formData.password, formData.rememberMe)
+    props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
 
   if (props.isAuth) {
@@ -30,7 +30,7 @@ const Login = (props: LoginContainerType) => {
         </p>
       </div>
       <h2 data-testid={"login"} className={classes.posts__header}>Login</h2>
-      <LoginReduxForm onSubmit={onSubmit}/>
+      <LoginReduxForm captchaUrl={props.captchaUrl} onSubmit={onSubmit}/>
     </div>
   )
 }
@@ -38,10 +38,11 @@ const Login = (props: LoginContainerType) => {
 type mapStateToPropsType = {
   isAuth: boolean
   userId: number | null
+  captchaUrl: string | null
 }
 
 type mapDispatchToPropsType = {
-  login: (email: string, password: string, rememberMe: boolean) => void
+  login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
 type LoginContainerType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -49,7 +50,8 @@ type LoginContainerType = mapStateToPropsType & mapDispatchToPropsType
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   return {
     isAuth: state.auth.isAuth,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    captchaUrl: state.auth.captchaUrl
   }
 }
 

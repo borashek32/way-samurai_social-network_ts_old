@@ -6,13 +6,18 @@ import React from "react";
 import {Input} from "../utils/input/Input";
 
 
+export type LoginOwnType = {
+  captchaUrl: string | null
+}
+
 export type LoginFormType = {
   email: string
   password: string
   rememberMe: boolean
+  captcha: string
 }
 
-export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({error, handleSubmit}) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormType, LoginOwnType> & LoginOwnType> = ({error, handleSubmit, captchaUrl}) => {
 
   return (
     <form
@@ -57,6 +62,19 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({error, ha
           type={"checkbox"}
         />
       </div>
+      {captchaUrl && <div style={{display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
+        <img src={captchaUrl} alt={"captcha"} />
+        <div style={{display: "flex", flexDirection: "column", marginBottom: "-20px"}}>
+          <p style={{margin: "0 0 10px 20px"}}>Captcha:</p>
+          <Field
+            placeholder={"Enter symbols"}
+            type={"text"}
+            name={"captcha"}
+            component={Input}
+            error={error ? "Please enter valid Captcha" : ""}
+          />
+        </div>
+      </div>}
       <button
         className={classes.button}
         style={{marginTop: '15px'}}
@@ -68,6 +86,6 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({error, ha
 }
 
 
-export const LoginReduxForm = reduxForm<LoginFormType>({
+export const LoginReduxForm = reduxForm<LoginFormType, LoginOwnType>({
   form: 'login',
 }) (LoginForm)
