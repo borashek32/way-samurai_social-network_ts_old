@@ -1,7 +1,6 @@
-import {ProfileInfo} from "./profile-info/ProfileInfo";
-import PostsContainer from "./posts/PostsContainer";
-import {ApiUserProfileType, PhotoType, ProfilePageType} from "../../../redux/profile-reducer";
-import {Redirect} from "react-router-dom";
+import {ProfileInfo} from "./profile-info/ProfileInfo"
+import PostsContainer from "./posts/PostsContainer"
+import {ApiUserProfileType, ProfilePageType} from "../../../redux/profile-reducer"
 
 type PropsType = {
   profilePage: ProfilePageType
@@ -11,6 +10,7 @@ type PropsType = {
   isAuth: boolean
   isOwner: boolean
   savePhoto: (photo: File) => void
+  saveProfileData: (formData: ApiUserProfileType) => Promise<any>
 }
 
 export const Profile = (props: PropsType) => {
@@ -23,6 +23,7 @@ export const Profile = (props: PropsType) => {
         updateStatus={props.updateStatus}
         isOwner={props.isOwner}
         savePhoto={props.savePhoto}
+        saveProfileData={props.saveProfileData}
       />
       <PostsContainer />
     </div>

@@ -10,8 +10,8 @@ export type AddMessageFormType = {
   newMessageBody: string
 }
 
-const minLength = minLengthCreator(3)
-const maxLength = maxLengthCreator(7)
+export const minLength = minLengthCreator(3)
+export const maxLength = maxLengthCreator(200)
 
 export const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => {
 

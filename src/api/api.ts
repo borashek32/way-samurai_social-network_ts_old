@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ApiUserProfileType} from "../redux/profile-reducer";
 
 const instance = axios.create({
   withCredentials: true,
@@ -40,10 +41,13 @@ export const profileApi = {
   savePhoto(photo: File) {
     let formData = new FormData()
     formData.append("image", photo)
-    return instance.put('/profile/photo', formData, {
+    return instance.put('profile/photo', formData, {
       headers: {
       'Content-Type': 'multipart/form-data'
     }})
+  },
+  saveProfileData(formData: ApiUserProfileType) {
+    return instance.put(`profile/`, formData)
   }
 }
 

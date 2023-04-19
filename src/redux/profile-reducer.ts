@@ -1,6 +1,9 @@
 import {v1} from "uuid";
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {profileApi, usersApi} from "../api/api";
+import {AppStateType} from "./redux-store";
+import {ThunkDispatch} from "redux-thunk";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "profile/ADD_POST"
 const REMOVE_POST = "profile/REMOVE_POST"
@@ -73,8 +76,18 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
 }
 export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
   const response = await profileApi.savePhoto(photo)
-
   if (response.data.resultCode === 0) dispatch(savePhotoAC(response.data.data.photos))
+}
+export const saveProfileData = (formData: ApiUserProfileType) => async (dispatch: ThunkDispatch<ApiUserProfileType, unknown, AnyAction>, getState: () => AppStateType) => {
+  const response = await profileApi.saveProfileData(formData)
+  if (response.data.resultCode === 0) {
+    await dispatch(getUserProfile(getState().auth.userId))
+  } else {
+    dispatch(stopSubmit("profile", {
+      _error: response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+    }))
+    return Promise.reject(response.data.messages[0])
+  }
 }
 
 

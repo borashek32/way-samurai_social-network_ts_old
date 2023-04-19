@@ -13,11 +13,11 @@ export type InputType = {
 }
 
 export const Input: React.FC<InputType> = ({
-                                            input,
-                                            meta: {touched},
-                                            placeholder,
-  error
-}) => {
+                                             input,
+                                             meta: {touched},
+                                             placeholder,
+                                             error
+                                           }) => {
 
   const cl = classes.addPost__textarea + ' ' + (error ? classes.erroredTextarea : '')
 

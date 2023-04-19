@@ -2,6 +2,7 @@ import classes from './ButtonDefault.module.sass'
 
 type ButtonDefaultType = {
   name: string
+  callback?: () => void
 }
 
 export const ButtonDefault = (props: ButtonDefaultType) => {

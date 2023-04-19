@@ -1,8 +1,10 @@
-import classes from "../Profile.module.sass";
-import {ApiUserProfileType} from "../../../../redux/profile-reducer";
-import {Preloader} from "../../../utils/preloader/Preloader";
-import {ProfileStatus} from "./ProfileStatus";
-import {ChangeEvent} from "react";
+import classes from "../Profile.module.sass"
+import s from './../posts/Posts.module.sass'
+import {ApiUserProfileType} from "../../../../redux/profile-reducer"
+import {Preloader} from "../../../utils/preloader/Preloader"
+import {ProfileStatus} from "./ProfileStatus"
+import React, {ChangeEvent, useState} from "react"
+import {ReduxProfileForm} from "./ProfileDataForm"
 
 type ProfileInfoType = {
   profile: ApiUserProfileType
@@ -10,9 +12,12 @@ type ProfileInfoType = {
   updateStatus: (status: string) => void
   isOwner: boolean
   savePhoto: (photo: File) => void
+  saveProfileData: (formData: ApiUserProfileType) => Promise<any>
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
+
+  const [onEditMode, setOnEditMode] = useState(false)
 
   if (!props.profile) {
     return <Preloader/>
@@ -22,6 +27,14 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     if (e.target.files && e.target.files.length) {
       props.savePhoto(e.target.files[0])
     }
+  }
+
+  const toggleEditMode = () => {
+    setOnEditMode(!onEditMode)
+  }
+
+  const saveProfileData = (formData: ApiUserProfileType) => {
+    props.saveProfileData(formData).then(() => setOnEditMode(!onEditMode))
   }
 
   return (
@@ -46,15 +59,38 @@ export const ProfileInfo = (props: ProfileInfoType) => {
               onChange={onMainPhotoSelected}
             />}
         </div>
+
+        {!onEditMode &&
         <div className={classes.profile__info}>
-          <p className={classes.profile__item}>Nickname: {props.profile.uniqueUrlName}</p>
-          <p className={classes.profile__item}>Full Name: {props.profile.fullName}</p>
-          <p className={classes.profile__item}>Instagram: {props.profile.contacts.instagram}</p>
-          <p className={classes.profile__item}>Facebook: {props.profile.contacts.facebook}</p>
-          <p className={classes.profile__item}>Github: {props.profile.contacts.github}</p>
-          <p className={classes.profile__item}>About Me: {props.profile.aboutMe}</p>
-          <p className={classes.profile__item}>Work: {props.profile.lookingForAJob ? "already hired" : "looking for a job"}</p>
-        </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>Full Name:</p> {props.profile.fullName}
+          </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>About Me:</p> {props.profile.aboutMe}
+          </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>Looking for a job:</p>
+            <input type="checkbox" readOnly checked={props.profile.lookingForAJob}/>
+          </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>Skills:</p> {props.profile.lookingForAJobDescription}
+          </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>Instagram:</p> {props.profile.contacts.instagram}
+          </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>Facebook:</p> {props.profile.contacts.facebook}
+          </div>
+          <div className={classes.profile__item}>
+            <p className={classes.profile__status}>Github:</p> {props.profile.contacts.github}
+          </div>
+
+          <button className={s.post__button} onClick={onEditMode ? () => saveProfileData : toggleEditMode}>
+            Edit Profile
+          </button>
+        </div>}
+
+        {onEditMode && <ReduxProfileForm initialValues={props.profile} onSubmit={saveProfileData} />}
       </div>
     </>
   )

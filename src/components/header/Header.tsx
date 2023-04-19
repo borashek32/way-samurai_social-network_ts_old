@@ -18,19 +18,22 @@ function Header(props: HeaderType) {
              alt="logo"/>
       </NavLink>
       <ul className={classes.header__menu}>
-        <li className={classes.nav__item}>
+        <li>
           <NavLink to={"/profile/" + props.userId} activeClassName={classes.active}>Profile</NavLink>
         </li>
-        <li className={classes.nav__item}>
+        <li>
           <NavLink to="/dialogs" activeClassName={classes.active}>Dialogs</NavLink>
         </li>
-        <li className={classes.nav__item}>
+        <li>
           <NavLink to="/users" activeClassName={classes.active}>Users</NavLink>
         </li>
-        <li className={classes.nav__item}>
+        <li>
           {props.isAuth
-              ? <p>{props.login} <button onClick={props.logout}>Log out</button></p>
-              : <NavLink to="/login" activeClassName={classes.active}>Login</NavLink>
+              ? <div className={classes.nav__item}>
+                  <p>{props.login}</p>
+                  <button onClick={props.logout} className={classes.login__button}>Log out</button>
+                </div>
+              : <NavLink to="/login" className={classes.login__button}>Login</NavLink>
           }
         </li>
       </ul>
