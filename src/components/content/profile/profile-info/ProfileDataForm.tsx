@@ -6,7 +6,7 @@ import classes from "../Profile.module.sass";
 
 
 type ProfileFormProps = {
-  onSubmit: (formData: ApiUserProfileType) => void;
+  onSubmit: (formData: ApiUserProfileType) => void
 };
 
 type ProfileFormData = ApiUserProfileType;

@@ -4,6 +4,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 export type ProfileStatusType = {
   status: string
   updateStatus: (status: string) => void
+  isOwner: boolean
 }
 
 export const ProfileStatus = (props: ProfileStatusType) => {
@@ -16,11 +17,13 @@ export const ProfileStatus = (props: ProfileStatusType) => {
   }, [props.status])
 
   const onEditMode = () => {
-    setEditMode(true)
+    if (props.isOwner) setEditMode(true)
   }
   const offEditMode = () => {
-    setEditMode(false)
-    props.updateStatus(status)
+    if (props.isOwner) {
+      setEditMode(false)
+      props.updateStatus(status)
+    }
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

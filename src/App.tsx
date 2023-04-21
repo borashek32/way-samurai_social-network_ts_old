@@ -8,7 +8,7 @@ import Login from "./components/login/Login"
 import NavbarContainer from "./components/navbar/NavbarContainer"
 import {connect} from "react-redux";
 import {Footer} from "./components/footer/Footer"
-import {Route, withRouter} from "react-router-dom"
+import {Redirect, Route, withRouter} from "react-router-dom"
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/utils/preloader/Preloader";
