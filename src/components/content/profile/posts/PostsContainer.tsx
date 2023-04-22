@@ -5,11 +5,10 @@ import {AppStateType} from "../../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {
   addPostAC,
-  editPostAC,
-  loadPostData,
+  savePostAC,
   ProfilePageType,
   removePostAC,
-  setIsPublished
+  setIsPublished, PostType
 } from "../../../../redux/profile-reducer";
 
 
@@ -20,8 +19,7 @@ type MapDispatchToProps = {
   addPost: (descForNewPost: string) => void
   removePost: (postId: string) => void
   setIsPublished: (isPublished: boolean, postId: string) => void
-  editPost: (desc: string, postId: string) => void
-  loadPostDesc: (desc: string, postId: string) => void
+  savePost: (post: PostType) => void
 }
 
 export type PostsPagePropsType = MapStatePropsType & MapDispatchToProps & {isOwner: boolean}
@@ -37,8 +35,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     addPost: (descForNewPost: string) => dispatch(addPostAC(descForNewPost)),
     removePost: (postId: string) => dispatch(removePostAC(postId)),
     setIsPublished: (isPublished: boolean, postId: string) => dispatch(setIsPublished(isPublished, postId)),
-    editPost: (desc: string, postId: string) => dispatch(editPostAC(desc, postId)),
-    loadPostDesc: (desc: string, postId: string) => dispatch(loadPostData(desc, postId))
+    savePost: (post: PostType) => dispatch(savePostAC(post))
   }
 }
 

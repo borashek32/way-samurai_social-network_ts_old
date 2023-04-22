@@ -86,7 +86,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
             <p className={classes.profile__status}>Github:</p> {props.profile.contacts.github}
           </div>
 
-          {props.isOwner && <button className={s.post__button} onClick={onEditMode ? () => saveProfileData : toggleEditMode}>
+          {props.isOwner &&
+          <button className={s.post__button} onClick={onEditMode ? () => saveProfileData : toggleEditMode}>
             Edit Profile
           </button>}
         </div>}

@@ -25,7 +25,7 @@ export const TextArea: React.FC<TextAreaType> = ({
         {...input}
         placeholder={placeholder}
         className={cl}
-        rows={4}
+        rows={3}
       ></textarea>
       {touched && error && <span className={classes.erroredSpan}>{error}</span>}
     </div>

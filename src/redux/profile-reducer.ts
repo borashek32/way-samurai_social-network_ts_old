@@ -8,9 +8,8 @@ import {stopSubmit} from "redux-form";
 
 const ADD_POST = "profile/ADD_POST"
 const REMOVE_POST = "profile/REMOVE_POST"
-const EDIT_POST = "profile/EDIT_POST"
+const SAVE_POST = "profile/SAVE_POST"
 const SET_IS_PUBLISHED = "profile/SET_IS_PUBLISHED"
-const LOAD_POST_DESC = "profile/LOAD_POST_DESC"
 
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_STATUS = "profile/SET_STATUS"
@@ -22,8 +21,7 @@ export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof removePostAC>
   | ReturnType<typeof savePhotoAC>
   | ReturnType<typeof setIsPublished>
-  | ReturnType<typeof editPostAC>
-  | ReturnType<typeof loadPostData>
+  | ReturnType<typeof savePostAC>
 
 export type ProfilePageType = {
   title: string
@@ -68,8 +66,7 @@ export type ApiUserProfileType = {
 export const addPostAC = (descForNewPost: string) => ({type: ADD_POST, descForNewPost} as const)
 export const removePostAC = (postId: string) => ({type: REMOVE_POST, postId} as const)
 export const setIsPublished = (isPublished: boolean, postId: string) => ({type: SET_IS_PUBLISHED, isPublished, postId} as const)
-export const editPostAC = (desc: string, postId: string) => ({type: EDIT_POST, desc, postId} as const)
-export const loadPostData = (desc: string, postId: string) => ({type: LOAD_POST_DESC, desc, postId} as const)
+export const savePostAC = (post: PostType) => ({type: SAVE_POST, post} as const)
 const setUserProfile = (profile: ApiUserProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 const savePhotoAC = (photo: PhotoType) => ({type: SAVE_PHOTO, photo} as const)
@@ -162,17 +159,11 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
         posts: state.posts.map(p => p.id === action.postId ? {...p, isPublished: action.isPublished} : p)
       }
     }
-    case EDIT_POST: {
-      return {
-        ...state,
-        posts: state.posts.map(p => p.id === action.postId ? {...p, desc: action.desc} : p)
-      }
-    }
-    case LOAD_POST_DESC: {
+    case SAVE_POST: {
       debugger
       return {
         ...state,
-        descForNewPost: action.desc
+        posts: state.posts.map(p => p.id === action.post.id ? {...p, desc: action.post.desc} : p)
       }
     }
     case SET_USER_PROFILE: {

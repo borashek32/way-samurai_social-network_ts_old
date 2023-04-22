@@ -2,7 +2,7 @@ import React from "react"
 import classes from './Posts.module.sass'
 import {Post} from "./post/Post";
 import {PostsPagePropsType} from "./PostsContainer";
-import {AddPostFormType, AddPostReduxForm} from "./AddPostForm";
+import {AddPostFormType, AddPostReduxForm} from "./forms/AddPostForm";
 
 
 const Posts = React.memo<PostsPagePropsType>((props) => {
@@ -28,12 +28,16 @@ const Posts = React.memo<PostsPagePropsType>((props) => {
         if (p.userId === props.profilePage.profile.userId) {
           return (
             <Post
-              loadPostDesc={props.loadPostDesc}
+              savePost={props.savePost}
               setIsPublished={props.setIsPublished}
               removePost={props.removePost}
               authorPhoto={props.profilePage.profile.photos.large}
               fullName={props.profilePage.profile.fullName}
-              {...p}
+              desc={p.desc}
+              isPublished={p.isPublished}
+              id={p.id}
+              likes={p.likes}
+              userId={p.userId}
               key={p.id}
             />
           )

@@ -4,35 +4,41 @@ import React, {useState} from "react";
 import {PostType} from "../../../../../redux/profile-reducer";
 import {ButtonDefault} from "../../../../utils/buttons/ButtonDefault";
 import {Checkbox} from "../../../../utils/checkbox/Checkbox";
-import {TextArea} from "../../../../utils/textarea/TextArea";
-import {AddPostReduxForm} from "../AddPostForm";
+import {EditPostReduxForm} from "../forms/EditPostForm";
 
 
-type Props = {
+export type Props = {
+  id: string
+  desc: string
+  isPublished: boolean
+  userId: number
+  likes: number
   authorPhoto: string,
   fullName: string
   removePost: (postId: string) => void
   setIsPublished: (isPublished: boolean, postId: string) => void
-  loadPostDesc: (desc: string, postId: string) => void
+  savePost: (post: PostType) => void
 }
 
 export const Post: React.FC<PostType & Props> = ({
                                                    id,
-                                                   desc,
+                                                   isPublished,
                                                    likes,
+                                                   desc,
                                                    authorPhoto,
                                                    fullName,
-                                                   isPublished,
                                                    removePost,
                                                    setIsPublished,
-                                                   loadPostDesc
+                                                   savePost
                                                  }) => {
 
   const [editMode, setEditMode] = useState(false)
 
-  const onEditMode = () => {
+  const onEditMode = () => setEditMode(!editMode)
+
+  const savePostData = (post: PostType) => {
+    savePost(post)
     setEditMode(!editMode)
-    loadPostDesc(desc, id)
   }
 
   const deletePost = () => removePost(id)
@@ -43,18 +49,21 @@ export const Post: React.FC<PostType & Props> = ({
     <div className={classes.post}>
       <Author authorPhoto={authorPhoto} userName={fullName}/>
       <div className={classes.post__content}>
-        <p className={classes.post__desc}>{desc}</p>
-        <div className={classes.post__buttons}>
+        {editMode
+          ? <EditPostReduxForm onSubmit={savePostData} initialValues={{desc, id, isPublished, likes}}/>
+          : <p className={classes.post__desc}>{desc}</p>
+        }
+        {!editMode && <div className={classes.post__buttons}>
           Likes: {likes}
-          {/*<ButtonDefault*/}
-          {/*  callback={onEditMode}*/}
-          {/*  name={"Edit"}*/}
-          {/*/>*/}
+          <ButtonDefault
+            callback={!editMode ? onEditMode : () => savePostData}
+            name={"Edit"}
+          />
           <ButtonDefault
             callback={deletePost}
             name={"Delete"}
           />
-        </div>
+        </div>}
       </div>
       <div className={classes.post__published}>
         <p>Published:</p>
