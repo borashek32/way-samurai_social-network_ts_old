@@ -25,7 +25,7 @@ export const Dialogs = (props: PropsType) => {
               <div className={classes.messages__user_wrapper} key={dialog.id}>
                 <NavLink to={path} className={classes.messages__user} activeClassName={classes.active}>
                   <img className={classes.messages__user_img}
-                       src=""
+                       src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png"
                        alt="logo" width="30px"/>
                   {dialog.userName}
                 </NavLink>
