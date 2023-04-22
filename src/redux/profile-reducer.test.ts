@@ -10,11 +10,11 @@ beforeEach(() => {
     descForNewPost: '',
     status: 'newStatus',
     posts: [
-      {id: '1', desc: 'hi', likes: 12},
-      {id: '2', desc: 'hi nataly', likes: 9},
-      {id: '3', desc: 'hello', likes: 5},
-      {id: '4', desc: 'hoc', likes: 13},
-      {id: '5', desc: 'bye', likes: 1},
+      {id: '1', userId: 27310, isPublished: true, desc: 'hi', likes: 12},
+      {id: '2', userId: 27310, isPublished: true, desc: 'hi nataly', likes: 9},
+      {id: '3', userId: 27310, isPublished: true, desc: 'hello', likes: 5},
+      {id: '4', userId: 27310, isPublished: true, desc: 'hoc', likes: 13},
+      {id: '5', userId: 27310, isPublished: true, desc: 'bye', likes: 1},
     ],
     profile: {
       aboutMe: '',

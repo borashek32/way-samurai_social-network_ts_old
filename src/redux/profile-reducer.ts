@@ -5,8 +5,13 @@ import {AppStateType} from "./redux-store";
 import {ThunkDispatch} from "redux-thunk";
 import {stopSubmit} from "redux-form";
 
+
 const ADD_POST = "profile/ADD_POST"
 const REMOVE_POST = "profile/REMOVE_POST"
+const EDIT_POST = "profile/EDIT_POST"
+const SET_IS_PUBLISHED = "profile/SET_IS_PUBLISHED"
+const LOAD_POST_DESC = "profile/LOAD_POST_DESC"
+
 const SET_USER_PROFILE = "profile/SET_USER_PROFILE"
 const SET_STATUS = "profile/SET_STATUS"
 const SAVE_PHOTO = "profile/SAVE_PHOTO"
@@ -16,6 +21,9 @@ export type ActionsTypes = ReturnType<typeof addPostAC>
   | ReturnType<typeof setStatus>
   | ReturnType<typeof removePostAC>
   | ReturnType<typeof savePhotoAC>
+  | ReturnType<typeof setIsPublished>
+  | ReturnType<typeof editPostAC>
+  | ReturnType<typeof loadPostData>
 
 export type ProfilePageType = {
   title: string
@@ -25,6 +33,8 @@ export type ProfilePageType = {
   status: string
 }
 export type PostType = {
+  userId: number
+  isPublished: boolean
   id: string
   likes: number
   desc: string
@@ -57,6 +67,9 @@ export type ApiUserProfileType = {
 
 export const addPostAC = (descForNewPost: string) => ({type: ADD_POST, descForNewPost} as const)
 export const removePostAC = (postId: string) => ({type: REMOVE_POST, postId} as const)
+export const setIsPublished = (isPublished: boolean, postId: string) => ({type: SET_IS_PUBLISHED, isPublished, postId} as const)
+export const editPostAC = (desc: string, postId: string) => ({type: EDIT_POST, desc, postId} as const)
+export const loadPostData = (desc: string, postId: string) => ({type: LOAD_POST_DESC, desc, postId} as const)
 const setUserProfile = (profile: ApiUserProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 const savePhotoAC = (photo: PhotoType) => ({type: SAVE_PHOTO, photo} as const)
@@ -125,6 +138,8 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
   switch (action.type) {
     case ADD_POST: {
       let newPost: PostType = {
+        userId: 27310,
+        isPublished: false,
         id: v1(),
         likes: 0,
         desc: action.descForNewPost
@@ -139,6 +154,25 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       return {
         ...state,
         posts: state.posts.filter(p => p.id !== action.postId)
+      }
+    }
+    case SET_IS_PUBLISHED: {
+      return {
+        ...state,
+        posts: state.posts.map(p => p.id === action.postId ? {...p, isPublished: action.isPublished} : p)
+      }
+    }
+    case EDIT_POST: {
+      return {
+        ...state,
+        posts: state.posts.map(p => p.id === action.postId ? {...p, desc: action.desc} : p)
+      }
+    }
+    case LOAD_POST_DESC: {
+      debugger
+      return {
+        ...state,
+        descForNewPost: action.desc
       }
     }
     case SET_USER_PROFILE: {

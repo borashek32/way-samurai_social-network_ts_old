@@ -1,12 +1,6 @@
 import React from "react";
 import {Profile} from "./Profile";
-import {
-  ApiUserProfileType,
-  getStatus,
-  getUserProfile,
-  ProfilePageType, savePhoto, saveProfileData,
-  updateStatus
-} from "../../../redux/profile-reducer";
+import {ApiUserProfileType, getStatus, getUserProfile, ProfilePageType, savePhoto, saveProfileData, updateStatus} from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";

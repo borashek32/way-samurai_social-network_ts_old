@@ -25,7 +25,7 @@ export const Profile = (props: PropsType) => {
         savePhoto={props.savePhoto}
         saveProfileData={props.saveProfileData}
       />
-      <PostsContainer />
+      <PostsContainer isOwner={props.isOwner} />
     </div>
   )
 }

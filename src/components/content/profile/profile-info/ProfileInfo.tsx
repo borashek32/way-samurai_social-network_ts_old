@@ -50,7 +50,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
              className={classes.author__logo}
              src={props.profile.photos.small
                ? props.profile.photos.small
-               : "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=620&quality=45&dpr=2&s=none"
+               : "https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png"
              }
              alt={props.profile.fullName + ' image'}/>
           {props.isOwner &&

@@ -8,7 +8,6 @@ type PropsType = {
   user: UserType
   follow: (userId: number | null) => void
   unfollow: (userId: number | null) => void
-  // followingInProgress: Array<string>
   followingInProgress: any
 }
 
@@ -19,7 +18,7 @@ export const User = (props: PropsType) => {
       <div className={s.userContainer}>
         <NavLink to={"/profile/" + props.user.id} style={{display: "flex", gap: '50px'}}>
           <div className={s.user}>
-            <img src={props.user.photos.small ?? "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=620&quality=45&dpr=2&s=none"}
+            <img src={props.user.photos.small ?? "https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png"}
                  alt="avatar" className={s.user__ava}/>
           </div>
           <div className={classes.post__content}>

@@ -4,6 +4,7 @@ import {stopSubmit} from "redux-form";
 import {ThunkDispatch} from "redux-thunk";
 import {ApiUserProfileType} from "./profile-reducer";
 
+
 const SET_USER_DATA = "auth/SET-USER-DATA"
 const GET_CAPTCHA_URL = "auth/GET_CAPTCHA_URL"
 

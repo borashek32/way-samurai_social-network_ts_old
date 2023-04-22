@@ -10,7 +10,7 @@ export type AddPostFormType = {
 }
 
 const minLength = minLengthCreator(3)
-const maxLength = maxLengthCreator(7)
+const maxLength = maxLengthCreator(200)
 
 export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
 
@@ -23,7 +23,7 @@ export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props)
         validate={[required, minLength, maxLength]}
       />
       <div className={classes.post__buttons}>
-        <button className={classes.post__button} >Add Post</button>
+        <button className={classes.post__button}>Add Post</button>
       </div>
     </form>
   )

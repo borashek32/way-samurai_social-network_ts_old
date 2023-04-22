@@ -10,6 +10,7 @@ export const ButtonDefault = (props: ButtonDefaultType) => {
   return (
     <button
       className={classes.button}
+      onClick={props.callback}
     >
       {props.name}
     </button>

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import {ProfileStatus} from "./ProfileStatus"
 import {render, screen} from "@testing-library/react"
 import '@testing-library/jest-dom/extend-expect'
