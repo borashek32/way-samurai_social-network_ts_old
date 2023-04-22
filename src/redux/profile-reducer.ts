@@ -160,7 +160,6 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       }
     }
     case SAVE_POST: {
-      debugger
       return {
         ...state,
         posts: state.posts.map(p => p.id === action.post.id ? {...p, desc: action.post.desc} : p)
