@@ -1,9 +1,9 @@
-import classes from "./Dialogs.module.sass";
+import classes from "../Dialogs.module.sass";
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {ButtonDefault} from "../../utils/buttons/ButtonDefault";
-import {TextArea} from "../../utils/textarea/TextArea";
-import {maxLengthCreator, minLengthCreator, required} from "../../utils/validation/FieldValidation";
+import {ButtonDefault} from "../../../utils/buttons/ButtonDefault";
+import {TextArea} from "../../../utils/textarea/TextArea";
+import {maxLengthCreator, minLengthCreator, required} from "../../../utils/validation/FieldValidation";
 
 
 export type AddMessageFormType = {

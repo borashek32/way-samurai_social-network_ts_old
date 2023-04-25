@@ -13,7 +13,7 @@ type PropsType = {
 export const Users = (props: PropsType) => {
 
   return (
-    <div>
+    <>
       <div>
         <Paginator
           onPageChanged={props.onPageChanged}
@@ -39,6 +39,6 @@ export const Users = (props: PropsType) => {
             )
           })}
       </div>
-    </div>
+    </>
   )
 }

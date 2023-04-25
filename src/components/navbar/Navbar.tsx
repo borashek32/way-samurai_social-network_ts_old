@@ -20,13 +20,29 @@ export const Navbar = (props: NavbarType) => {
     <nav className={classes.nav}>
       <ul className={classes.nav__list}>
         <li className={classes.nav__item}>
-          <NavLink to={'/profile/' + props.userId} onClick={getUserId} activeClassName={classes.active}>Profile</NavLink>
+          <NavLink
+            to={'/profile/' + props.userId}
+            onClick={getUserId}
+            activeClassName={classes.active}
+          >
+            Profile
+          </NavLink>
         </li>
         <li className={classes.nav__item}>
-          <NavLink to="/dialogs" activeClassName={classes.active}>Dialogs</NavLink>
+          <NavLink
+            to="/dialogs"
+            activeClassName={classes.active}
+          >
+            Dialogs
+          </NavLink>
         </li>
         <li className={classes.nav__item}>
-          <NavLink to="/users" activeClassName={classes.active}>Users</NavLink>
+          <NavLink
+            to="/users"
+            activeClassName={classes.active}
+          >
+            Users
+          </NavLink>
         </li>
       </ul>
     </nav>

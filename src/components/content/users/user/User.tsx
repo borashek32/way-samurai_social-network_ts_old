@@ -22,7 +22,7 @@ export const User = (props: PropsType) => {
                  alt="avatar" className={s.user__ava}/>
           </div>
           <div className={classes.post__content}>
-            <div className={s.user__name}>{props.user.name} {props.user.id}</div>
+            <div className={s.user__name}>{props.user.name}</div>
             <div className={s.user__info}>Status: {props.user.status}</div>
           </div>
         </NavLink>

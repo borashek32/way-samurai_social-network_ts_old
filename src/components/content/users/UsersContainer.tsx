@@ -57,8 +57,8 @@ class UsersComponent extends React.Component<UsersPagePropsType> {
 }
 
 const mapStateToProps = (state: AppStateType) => {
+
   return {
-    // users: getUsersPage(state),
     users: getUsersPage(state),
     title: getUsersPageTitle(state),
     pageSize: getPageSize(state),

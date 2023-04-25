@@ -1,51 +1,32 @@
 import classes from './Dialogs.module.sass'
-import {NavLink} from "react-router-dom"
-import React from "react";
-import {DialogsPagePropsType} from "./DialogsContainer";
-import {AddMessageFormType, AddMessageReduxForm} from "./AddMessageForm";
+import s from "./../profile/posts/Posts.module.sass"
+import React from "react"
+import {DialogsPagePropsType} from "./DialogsContainer"
+import {Dialog} from "./Dialog";
 
 
 export type PropsType = DialogsPagePropsType
 
 export const Dialogs = (props: PropsType) => {
 
-  const addNewMessage = (formData: AddMessageFormType) => {
-    props.onSendMessageClick(formData.newMessageBody)
-  }
+  console.log(props.users)
 
   return (
-    <div>
-      <div className={classes.messages}>
-        <div className={classes.messages__column_user}>
-          <h3 className={classes.messages__header}>{props.dialogsPage.dialogsTitle}</h3>
+    <div className={classes.posts}>
+      <h2 className={s.posts__header}>Dialogs</h2>
 
-          {props.dialogsPage.dialogs.map((dialog) => {
-            let path = "/dialogs/" + dialog.id;
-            return (
-              <div className={classes.messages__user_wrapper} key={dialog.id}>
-                <NavLink to={path} className={classes.messages__user} activeClassName={classes.active}>
-                  <img className={classes.messages__user_img}
-                       src="https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png"
-                       alt="logo" width="30px"/>
-                  {dialog.userName}
-                </NavLink>
-              </div>
-            )
-          })}
-        </div>
-        <div className={classes.messages__column_messages}>
-          <h3 className={classes.messages__header}>{props.dialogsPage.messagesTitle}</h3>
-          {props.dialogsPage.messages.map((m) => {
-
-            return (
-              <div key={m.id} className={classes.messageWrapper}>
-                <p>{m.text}</p>
-              </div>
-            )
-          })}
-          <AddMessageReduxForm onSubmit={addNewMessage} />
-        </div>
-      </div>
+      {props.dialogsPage.dialogs.map((dialog) =>
+        <Dialog
+          key={dialog.dialogId}
+          users={props.users}
+          dialog={dialog}
+          authenticatedUserId={props.authenticatedUserId}
+          saveChangedMessage={props.saveChangedMessage}
+          onSendMessageClick={props.onSendMessageClick}
+          removeMessage={props.removeMessage}
+          messages={props.dialogsPage.messages}
+        />
+      )}
     </div>
   );
 }

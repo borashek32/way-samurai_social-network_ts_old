@@ -1,7 +1,6 @@
 import {AnyAction, Dispatch} from "redux";
 import {usersApi} from "../api/api";
 import {AxiosResponse} from "axios";
-import {updateObjectInArray} from "../components/utils/helpers/object-helper";
 
 const FOLLOW = "users/FOLLOW"
 const UNFOLLOW = "users/UNFOLLOW"
@@ -29,7 +28,6 @@ export type UsersPageType = {
   currentPage: number
   maxPageCount: 10
   isFetching: boolean
-  // followingInProgress: Array<string>
   followingInProgress: any
 }
 export type UserType = {
@@ -85,7 +83,6 @@ export const usersReducer = (state = initialState, action: ActionsTypes): UsersP
   switch (action.type) {
     case FOLLOW: {
       return {...state,
-        // users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
         users: [...state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)]
       }
     }
