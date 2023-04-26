@@ -11,7 +11,7 @@ export type Props = {
   id: string
   desc: string
   isPublished: boolean
-  userId: number
+  userId: number | null
   likes: number
   authorPhoto: string,
   fullName: string

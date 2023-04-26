@@ -12,7 +12,7 @@ export type AddPostFormType = {
 const minLength = minLengthCreator(3)
 const maxLength = maxLengthCreator(200)
 
-export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
+export const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props, initialValues) => {
 
   return (
     <form onSubmit={props.handleSubmit} className={classes.post__content}>

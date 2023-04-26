@@ -43,7 +43,7 @@ beforeEach(() => {
 })
 
 test('new post should be added', () => {
-  const newState = profileReducer(state, addPostAC('it-kamasutra.com'))
+  const newState = profileReducer(state, addPostAC({descForNewPost: 'it-kamasutra.com'}, 27310))
 
   expect(newState.posts.length).toBe(6)
   expect(newState.posts[5].desc).toBe('it-kamasutra.com')

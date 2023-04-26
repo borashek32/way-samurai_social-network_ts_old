@@ -2,15 +2,20 @@ import React from "react"
 import classes from './Posts.module.sass'
 import {Post} from "./post/Post";
 import {PostsPagePropsType} from "./PostsContainer";
-import {AddPostFormType, AddPostReduxForm} from "./forms/AddPostForm";
+import {AddPostReduxForm} from "./forms/AddPostForm";
 
 
 const Posts = React.memo<PostsPagePropsType>((props) => {
 
-  const addPost = (formData: AddPostFormType) => {
-    props.addPost(formData.descForNewPost)
+  console.log(props.profilePage.posts)
+
+  const addPost = (formData: {descForNewPost: string}) => {
+    console.log("formData", formData)
+    props.addPost(formData, props.authenticatedUserId)
     formData.descForNewPost = ''
   }
+
+  console.log(props.authenticatedUserId)
 
   return (
     <div className={classes.posts}>
@@ -34,7 +39,8 @@ const Posts = React.memo<PostsPagePropsType>((props) => {
 
       {props.profilePage.posts.map((p) => {
 
-        if (p.userId === props.profilePage.profile.userId) {
+        if (p.userId === props.authenticatedUserId) {
+
           return (
             <Post
               savePost={props.savePost}

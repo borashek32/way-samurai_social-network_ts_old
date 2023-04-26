@@ -31,7 +31,7 @@ export type ProfilePageType = {
   status: string
 }
 export type PostType = {
-  userId: number
+  userId: number | null
   isPublished: boolean
   id: string
   likes: number
@@ -63,7 +63,8 @@ export type ApiUserProfileType = {
 }
 
 
-export const addPostAC = (descForNewPost: string) => ({type: ADD_POST, descForNewPost} as const)
+export const addPostAC = (formData: {descForNewPost: string}, authenticatedUserId: number | null) =>
+  ({type: ADD_POST, formData, authenticatedUserId} as const)
 export const removePostAC = (postId: string) => ({type: REMOVE_POST, postId} as const)
 export const setIsPublished = (isPublished: boolean, postId: string) => ({type: SET_IS_PUBLISHED, isPublished, postId} as const)
 export const savePostAC = (post: PostType) => ({type: SAVE_POST, post} as const)
@@ -135,12 +136,13 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
   switch (action.type) {
     case ADD_POST: {
       let newPost: PostType = {
-        userId: 27310,
+        userId: action.authenticatedUserId,
         isPublished: false,
         id: v1(),
         likes: 0,
-        desc: action.descForNewPost
+        desc: action.formData.descForNewPost
       }
+      debugger
       return {
         ...state,
         descForNewPost: "",
