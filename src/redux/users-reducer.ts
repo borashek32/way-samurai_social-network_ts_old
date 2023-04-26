@@ -20,29 +20,6 @@ export type ActionsTypes = ReturnType<typeof followSuccess>
   | ReturnType<typeof toggleIsFetching>
   | ReturnType<typeof toggleFollowingProgress>
 
-export type UsersPageType = {
-  title: string
-  users: UserType[]
-  pageSize: number
-  totalUsersCount: number
-  currentPage: number
-  maxPageCount: 10
-  isFetching: boolean
-  followingInProgress: any
-}
-export type UserType = {
-  id: number
-  photos: {
-    small: string
-    large: string
-  }
-  followed: boolean
-  uniqueUrlName: string
-  name: string
-  status: string
-  followingInProgress: Array<string>
-}
-
 export const followSuccess = (userId: number | null) => {
   return {type: FOLLOW, userId: userId} as const
 }
@@ -68,6 +45,28 @@ export const toggleFollowingProgress = (followingInProgress: boolean, userId: nu
   return {type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress: followingInProgress, userId: userId} as const
 }
 
+export type UsersPageType = {
+  title: string
+  users: UserType[]
+  pageSize: number
+  totalUsersCount: number
+  currentPage: number
+  maxPageCount: 10
+  isFetching: boolean
+  followingInProgress: any
+}
+export type UserType = {
+  id: number
+  photos: {
+    small: string
+    large: string
+  }
+  followed: boolean
+  uniqueUrlName: string
+  name: string
+  status: string
+  followingInProgress: Array<string>
+}
 const initialState: UsersPageType = {
   title: "Users",
   users: [],

@@ -44,6 +44,14 @@ export const Navbar = (props: NavbarType) => {
             Users
           </NavLink>
         </li>
+        <li className={classes.nav__item}>
+          <NavLink
+            to="/friends"
+            activeClassName={classes.active}
+          >
+            Friends
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

@@ -14,6 +14,8 @@ import {initializeApp} from "./redux/app-reducer";
 import {Preloader} from "./components/utils/preloader/Preloader";
 import {AppStateType} from "./redux/redux-store";
 import {Messages} from "./components/content/dialogs/messages/Messages";
+import {Friends} from "./components/content/friends/Friends";
+import FriendsContainer from "./components/content/friends/FriendsContainer";
 
 
 class App extends React.Component<any> {
@@ -45,6 +47,7 @@ class App extends React.Component<any> {
                 <Route path="/profile/:userId" exact component={ProfileContainer}/>
                 <Route path="/dialogs/:dialogId?" exact component={DialogsContainer}/>
                 <Route path="/users" exact component={UsersContainer}/>
+                <Route path="/friends" exact component={FriendsContainer}/>
                 <Route path="/login" exact component={Login}/>
               </div>
             </div>

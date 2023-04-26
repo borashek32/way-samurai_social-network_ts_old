@@ -3,7 +3,7 @@ import {UserType} from "../../../redux/users-reducer";
 import {User} from "./user/User";
 import React from "react";
 import {UsersPagePropsType} from "./UsersContainer";
-import {Paginator} from "./../../utils/pagination/Paginator";
+import {Paginator} from "../../utils/pagination/Paginator";
 
 type PropsType = {
   usersPageType: UsersPagePropsType

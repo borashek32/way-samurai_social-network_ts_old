@@ -13,6 +13,8 @@ type PropsType = {
 
 export const User = (props: PropsType) => {
 
+  console.log(props.user)
+
   return (
     <div className={s.userWrapper}>
       <div className={s.userContainer}>
@@ -30,21 +32,31 @@ export const User = (props: PropsType) => {
       <div className={s.user__buttons}>
         {!props.user.followed
           ? <button
-            className={s.button}
-            disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
-            onClick={() => {
-              props.follow(props.user.id)
-            }
+              className={s.button}
+              disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
+              onClick={() => {
+                props.follow(props.user.id)
+              }
             }>Follow</button>
 
-          : <button
-            className={s.button}
-            disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
-            onClick={() => {
-              props.unfollow(props.user.id)
-            }
-            }>Unfollow</button>
+          : <>
+              <button
+                className={s.button}
+              >
+                Message
+              </button>
+
+              <button
+                className={s.button}
+                disabled={props.followingInProgress.some((id: number | null) => id === props.user.id)}
+                onClick={() => {
+                  props.unfollow(props.user.id)
+              }}>
+                Unfollow
+              </button>
+            </>
         }
+
       </div>
     </div>
   )

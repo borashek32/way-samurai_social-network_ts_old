@@ -26,6 +26,12 @@ export const usersApi = {
     console.warn("You use an old method")
     return profileApi.getProfile(userId)
   },
+  getUsersForDialogs() {
+    return instance.get(`users`)
+      .then(response => {
+        return response.data
+      })
+  }
 }
 
 export const profileApi = {

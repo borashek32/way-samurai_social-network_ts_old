@@ -14,11 +14,20 @@ const Posts = React.memo<PostsPagePropsType>((props) => {
 
   return (
     <div className={classes.posts}>
+
       <h2 className={classes.posts__header}>
         {props.isOwner
           ? props.profilePage.title
           : props.profilePage.profile.fullName + "'s Posts"}
       </h2>
+      <div style={{lineHeight:'20px', fontSize: '12px', color: 'grey', textAlign: 'center', marginBottom: "20px"}}>
+        <p>
+          Hey, the posts are hardcoded only on frontend to demonstrate you its flow
+        </p>
+        <p>
+          Don't take it serious
+        </p>
+      </div>
       <div className={classes.addPost}>
         {props.isOwner && <AddPostReduxForm onSubmit={addPost} />}
       </div>

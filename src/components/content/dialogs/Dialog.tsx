@@ -3,12 +3,10 @@ import {NavLink, Route} from "react-router-dom";
 import {AddMessageFormType} from "./forms/AddMessageForm";
 import {Messages} from "./messages/Messages";
 import React, {FC} from "react";
-import {UserType} from "../../../redux/users-reducer";
 import {DialogType, MessageType} from "../../../redux/dialogs-reducer";
 
 
 type Props = {
-  users: UserType[]
   dialog: DialogType
   authenticatedUserId: number | null
   saveChangedMessage: (text: string, messageId: string, dialogId: string) => void
@@ -19,16 +17,12 @@ type Props = {
 
 export const Dialog: FC<Props> = ({
                                     dialog,
-                                    users,
                                     authenticatedUserId,
                                     saveChangedMessage,
                                     onSendMessageClick,
                                     removeMessage,
                                     messages
                                   }) => {
-
-  const user = users.find(u => u.id === dialog.userId)
-  console.log(user)
   return (
     <div key={dialog.dialogId} className={classes.messages}>
       <div className={classes.messages__column_user}>
@@ -40,9 +34,9 @@ export const Dialog: FC<Props> = ({
               activeClassName={classes.active}
             >
               <img className={classes.messages__user_img}
-                   src={user ? user.photos.small : "https://cdn.pixabay.com/photo/2016/03/28/12/35/cat-1285634__340.png"}
+                   src={dialog.photo}
                    alt="logo" width="30px"/>
-              {user && user.name}
+              {dialog.name}
             </NavLink>
           }
         </div>
@@ -62,9 +56,7 @@ export const Dialog: FC<Props> = ({
 
             return (
               <>
-                <h3 className={classes.messages__header}>Messages from {user?.name}</h3>
                 <Messages
-                  users={users}
                   authenticatedUserId={authenticatedUserId}
                   onSendMessageClick={addNewMessage}
                   messages={messages[dialog.dialogId]}

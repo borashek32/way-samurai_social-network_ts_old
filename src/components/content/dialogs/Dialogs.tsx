@@ -9,16 +9,22 @@ export type PropsType = DialogsPagePropsType
 
 export const Dialogs = (props: PropsType) => {
 
-  console.log(props.users)
-
   return (
     <div className={classes.posts}>
       <h2 className={s.posts__header}>Dialogs</h2>
 
+      <div style={{lineHeight:'20px', fontSize: '12px', color: 'grey', textAlign: 'center', marginBottom: "20px"}}>
+        <p>
+          Hey, this page is hardcoded only on frontend to demonstrate you messages flow
+        </p>
+        <p>
+          Don't take it serious
+        </p>
+      </div>
+
       {props.dialogsPage.dialogs.map((dialog) =>
         <Dialog
           key={dialog.dialogId}
-          users={props.users}
           dialog={dialog}
           authenticatedUserId={props.authenticatedUserId}
           saveChangedMessage={props.saveChangedMessage}

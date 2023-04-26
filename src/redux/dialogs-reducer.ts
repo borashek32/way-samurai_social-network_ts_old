@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {usersApi} from "../api/api";
-import {setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching} from "./users-reducer";
+import {setUsers} from "./users-reducer";
 
 
 const SEND_MESSAGE = "dialogs/SEND_MESSAGE"
@@ -23,11 +23,14 @@ export type MessageType = {
 export type DialogType = {
   dialogId: string
   userId: number
+  photo: string
+  name: string
 }
 export type OneMessageType = {
   id: string
   text: string
   userId: number
+  name: string
 }
 
 const dialog1 = v1()
@@ -36,25 +39,25 @@ const dialog3 = v1()
 
 const initialState: DialogPageType = {
   dialogs: [
-    {dialogId: dialog1, userId: 28821},
-    {dialogId: dialog2, userId: 28806},
-    {dialogId: dialog3, userId: 28791},
+    {dialogId: dialog1, userId: 300000000, name: "Polina", photo: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"},
+    {dialogId: dialog2, userId: 400000000, name: "Igor", photo: "https://images.unsplash.com/photo-1611915387288-fd8d2f5f928b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"},
+    {dialogId: dialog3, userId: 800000000, name: "Vadim", photo: "https://media.istockphoto.com/id/1322123064/photo/portrait-of-an-adorable-white-cat-in-sunglasses-and-an-shirt-lies-on-a-fabric-hammock.jpg?s=612x612&w=0&k=20&c=-G6l2c4jNI0y4cenh-t3qxvIQzVCOqOYZNvrRA7ZU5o="}
   ],
   messages: {
     [dialog1]: [
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 28821},
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 27310},
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 28821}
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 300000000, name: "Polina"},
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 27310, name: "Me"},
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 300000000, name: "Polina"}
     ] as OneMessageType[],
     [dialog2]: [
-      {id: v1(), text: "test Lorem ipsum dolor sit amet", userId: 28806},
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 27310},
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 28806}
+      {id: v1(), text: "test Lorem ipsum dolor sit amet", userId: 400000000, name: "Igor"},
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 27310, name: "Me"},
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 400000000, name: "Igor"}
     ] as OneMessageType[],
     [dialog3]: [
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 28791},
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 27310},
-      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 28791}
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 800000000, name: "Vadim"},
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 27310, name: "Me"},
+      {id: v1(), text: "Lorem ipsum dolor sit amet", userId: 800000000, name: "Vadim"}
     ] as OneMessageType[]
   } as MessageType
 }
@@ -68,7 +71,7 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
           ...state.messages,
           [action.dialogId]: [
             ...state.messages[action.dialogId],
-            { id: v1(), text: action.newMessageBody, userId: action.userId },
+            { id: v1(), text: action.newMessageBody, userId: action.userId, name: "Me" },
           ],
         },
       }
@@ -110,13 +113,10 @@ export const editMessageActionCreator = (text: string, messageId: string, dialog
 export const deleteMessageActionCreator = (messageId: string, dialogId: string) => {
   return {type: DELETE_MESSAGE, messageId, dialogId} as const
 }
-
-export const requestUsersForDialogs = () => {
+// thunk to get all users
+export const requestAllUsers = () => {
   return async (dispatch: Dispatch) => {
-    dispatch(toggleIsFetching(true))
-    const response = await usersApi.getUsers(10, 100)
-    dispatch(toggleIsFetching(false))
+    const response = await usersApi.getUsersForDialogs()
     dispatch(setUsers(response.items))
-    dispatch(setTotalUsersCount(response.totalCount))
   }
 }
